@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publicar Tarea | Avengers Colombia</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <header>
+    <h1>Publicar Tarea</h1>
+    <nav>
+      <a href="mis-tareas.html">Mis Tareas</a>
+      <a href="publicar-tarea.html">Publicar Tarea</a>
+    </nav>
+  </header>
+  <main>
+    <section class="form-container">
+      <h2>Describe tu tarea</h2>
+      <form id="tareaForm">
+        <label for="titulo">Título de la tarea:</label>
+        <input type="text" id="titulo" maxlength="100" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" maxlength="500" required></textarea>
+
+        <label for="tema">Tema relacionado:</label>
+        <select id="tema" required>
+          <option value="">Seleccionar...</option>
+          <option value="Literatura">Literatura</option>
+          <option value="Tecnología">Tecnología</option>
+          <option value="Psicología">Psicología</option>
+          <option value="Ortografía">Ortografía</option>
+          <option value="Otros">Otros</option>
+        </select>
+
+        <label for="fecha">Fecha deseada:</label>
+        <input type="date" id="fecha" required>
+
+        <button type="submit">Publicar</button>
+      </form>
+    </section>
+  </main>
+
+  <section>
+    <a href="#" class="logout" onclick="cerrarSesion()">Cerrar sesión</a>
+  </section>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

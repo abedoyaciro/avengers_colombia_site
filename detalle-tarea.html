@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle de Tarea | Avengers Colombia</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero-comment-box {
+      background-color: #fef3c7;
+      border-left: 4px solid #f77f00;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Detalle de Tarea</h1>
+    <nav>
+      <a href="mis-tareas.html">Volver</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="detalleTarea" class="form-container">
+      <!-- Aquí se mostrará la información -->
+    </section>
+  </main>
+
+  <script>
+    const tarea = JSON.parse(localStorage.getItem('tareaSeleccionada'));
+    const contenedor = document.getElementById('detalleTarea');
+
+    if (tarea) {
+      contenedor.innerHTML = `
+        <h2>${tarea.titulo}</h2>
+        <p><strong>Descripción:</strong> ${tarea.descripcion}</p>
+        <p><strong>Tema:</strong> ${tarea.tema}</p>
+        <p><strong>Fecha de entrega:</strong> ${tarea.fecha}</p>
+        <p><strong>Estado:</strong> ${tarea.estado}</p>
+        <p><strong>Comentario del Héroe:</strong></p>
+        <div class="hero-comment-box">${tarea.comentarioHeroe || 'Sin comentario.'}</div>
+      `;
+    } else {
+      contenedor.innerHTML = `<p>No se encontró la información de la tarea.</p>`;
+    }
+  </script>
+</body>
+</html>
