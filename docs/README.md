@@ -6,7 +6,7 @@ Equipo 19 - Proyecto de Desarrollo Web - 2025-1
 
 ## 📘 Requisitos del Sistema
 
-[Ver docsmento PDF](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/requisitos.pdf)
+[Ver documento PDF](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/requisitos.pdf) (Se corrigió el requisito relacionado a la contraseña)
 
 ---
 
