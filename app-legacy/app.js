@@ -193,9 +193,15 @@ function generarTablaTareas() {
   let tabla = `<table>
     <thead>
       <tr>
-        <th>Título</th><th>Descripción</th><th>Tema</th><th>Fecha</th><th>Estado</th><th>Acciones</th>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Especialización</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acciones</th>
       </tr>
-    </thead><tbody>`;
+    </thead>
+    <tbody>`;
 
   tareas.forEach((tarea, index) => {
     tabla += `
