@@ -4,22 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro Héroe | Avengers Colombia</title>
+  <title>Registro Usuario | Avengers Colombia</title>
   <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
   <header>
-    <h1>Registro de Héroe</h1>
+    <h1>Registro de Usuario</h1>
     <nav>
-      <a href="index.html">Inicio</a>
+      <a href="../index.html">Inicio</a>
     </nav>
   </header>
   <main>
     <section class="form-container">
-      <h2>Crear cuenta como Héroe</h2>
-      <form id="registerHeroForm">
+      <h2>Crear cuenta como Usuario</h2>
+      <form id="registerUserForm">
         <label for="nombre">Nombre completo:</label>
         <input type="text" id="nombre" required>
 
@@ -29,22 +29,15 @@
         <label for="password">Contraseña:</label>
         <input type="password" id="password" required>
 
-        <label for="especializacion">Especialización:</label>
-        <select id="especializacion" required>
-          <option value="">Elegir...</option>
-          <option value="Literatura">Literatura</option>
-          <option value="Tecnología">Tecnología</option>
-          <option value="Psicología">Psicología</option>
-          <option value="Ortografía">Ortografía</option>
-          <option value="Otros">Otros</option>
-        </select>
+        <label for="ubicacion">Ubicación (Colombia):</label>
+        <input type="text" id="ubicacion" required>
 
         <button type="submit">Registrar</button>
       </form>
       <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
     </section>
   </main>
-  <script src="script.js"></script>
+  <script src="app.js"></script>
 
 </body>
 
