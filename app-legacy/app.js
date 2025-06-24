@@ -204,6 +204,20 @@ function generarTablaTareas() {
     <tbody>`;
 
   tareas.forEach((tarea, index) => {
+    const especializacionActual = tarea.especializacion || tarea.tema || "";
+
+    let selectHtml = `<select ${tarea.estado !== 'Sin Asignar' ? 'disabled' : ''} required>`;
+    selectHtml += `<option value="">Elegir...</option>`;
+    especializaciones.forEach(opt => {
+      selectHtml += `<option value="${opt}"${opt === especializacionActual ? ' selected' : ''}>${opt}</option>`;
+    });
+    selectHtml += `</select>`;
+
+    // Solo permitir editar la fecha si la tarea NO está finalizada
+    let fechaInput = tarea.estado === 'Finalizada'
+      ? `<input type="date" value="${tarea.fecha}" disabled>`
+      : `<input type="date" value="${tarea.fecha}" required>`;
+
     tabla += `
       <tr>
         <td contenteditable="${tarea.estado === 'Sin Asignar'}">${tarea.titulo}</td>
