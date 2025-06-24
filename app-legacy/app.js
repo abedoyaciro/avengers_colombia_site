@@ -23,7 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cambiar el título del <h1> en el header
     const headerTitle = document.querySelector('header h1');
     if (headerTitle) {
-      headerTitle.textContent = datos.rol === 'heroe' ? 'Panel del Héroe' : 'Panel del Usuario';
+      headerTitle.textContent = datos.rol === 'heroe' ? 
+        `Bienvenido, ${datos.nombre}. Eres un heroe!` :
+        `Bienvenido, ${datos.nombre}`;
+    }
+
+    // Redirigir a la página correspondiente según el rol
+    if (window.location.pathname.endsWith('index.html')) {
+      datos.rol === 'heroe' ?
+        window.location.href = 'app-legacy/tareas-heroe.html' :
+        window.location.href = 'app-legacy/mis-tareas.html';
     }
   }
 });
