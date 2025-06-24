@@ -11,8 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const datos = [...usuarios, ...heroes].find(u => u.email === usuarioActivo);
 
   if (datos) {
+
+
     // Cambiar clase visual si es héroe
     if (datos.rol === 'heroe') {
+      
+      // Agregar clase especial al body
       document.body.classList.add('modo-heroe');
 
       // Agregar clase especial al <nav>
@@ -34,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'app-legacy/tareas-heroe.html' :
         window.location.href = 'app-legacy/mis-tareas.html';
     }
+
   }
 });
 
@@ -41,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ---------- Función general para cerrar sesión ----------
 function cerrarSesion() {
   localStorage.removeItem('usuarioActivo');
-  window.location.href = 'index.html';
+  window.location.href = '../index.html';
 }
 
 // ---------- Inicio de sesión ----------
