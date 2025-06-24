@@ -228,7 +228,7 @@ function generarTablaTareas() {
         <td>
           ${tarea.estado === 'Sin Asignar'
         ? `
-                <button onclick="guardarCambios(${index})">Guardar</button>
+                <button onclick="guardarCambiosValidando(${index})">Guardar</button>
                 <button onclick="eliminarTarea(${index})">Eliminar</button>
               `
         : tarea.estado === 'Finalizada'
@@ -236,7 +236,6 @@ function generarTablaTareas() {
           : ''
       }
         </td>
-
       </tr>`;
   });
 
