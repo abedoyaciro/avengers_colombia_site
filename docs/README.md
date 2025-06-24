@@ -12,8 +12,14 @@ Equipo 19 - Proyecto de Desarrollo Web - 2025-1
 
 ## 📂 Casos de Uso
 
-* [Explicación de casos de uso](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/casos_uso_explicacion.pdf)
-* [Diagrama de casos de uso](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/casos_uso_diagrama.svg)
+- [Explicación de casos de uso](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/casos_uso_explicacion.pdf)
+- [Diagrama de casos de uso](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/casos_uso_diagrama.svg)
+
+### 📝 Actualizaciones Casos de Uso *23/06/2025*
+
+- **Tema:** Defininición y categorías de especialización de los héroes (ej: rescate, tecnología).
+- **Tareas:** Los héroes pueden aceptar cualquier tarea, sin importar su especialidad.
+- **Filtrado de tareas:** Por tema y ubicación.
 
 ---
 
