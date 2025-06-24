@@ -28,9 +28,11 @@ Puedes acceder y probar la plataforma directamente desde el siguiente enlace:
 ### Opción 2: Ejecutar localmente
 
 1. **Clona el repositorio:**
+
    ```bash
    git clone https://github.com/abedoyaciro/avengers_colombia_site.git
    ```
+
 2. **Abre la carpeta del proyecto en tu editor (por ejemplo, VS Code).**
 3. **Abre el archivo `index.html` en tu navegador.**
    - Puedes hacer doble clic sobre el archivo o usar una extensión como "Live Server" en VS Code para una mejor experiencia.
@@ -44,15 +46,18 @@ Puedes acceder y probar la plataforma directamente desde el siguiente enlace:
 Al iniciar la aplicación por primera vez, se cargan automáticamente los siguientes datos de ejemplo en el `localStorage`:
 
 **Usuarios:**
+
 - Juan Pérez (`juan@correo.com`), contraseña: `Demo123!`, ubicación: Bogotá
 - Ana Torres (`ana@correo.com`), contraseña: `Demo123!`, ubicación: Medellín
 
 **Héroes:**
+
 - Capitán Colombia (`capitan@correo.com`), contraseña: `Heroe123!`, especialización: Tecnología
 - Doctora Paz (`paz@correo.com`), contraseña: `Heroe123!`, especialización: Psicología
 
 **Tareas:**
-- **Ayuda con ensayo:** 
+
+- **Ayuda con ensayo:**
   Tema: Literatura  
   Descripción: Necesito ayuda con un ensayo de literatura.  
   Fecha: 2025-06-25  
