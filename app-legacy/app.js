@@ -1,3 +1,24 @@
+// --- Datos por defecto para desarrollo/demo ---
+if (!localStorage.getItem('usuarios')) {
+  localStorage.setItem('usuarios', JSON.stringify([
+    { nombre: "Juan Pérez", email: "juan@correo.com", password: "Demo123!", ubicacion: "Bogotá", rol: "usuario" },
+    { nombre: "Ana Torres", email: "ana@correo.com", password: "Demo123!", ubicacion: "Medellín", rol: "usuario" }
+  ]));
+}
+if (!localStorage.getItem('heroes')) {
+  localStorage.setItem('heroes', JSON.stringify([
+    { nombre: "Capitán Colombia", email: "capitan@correo.com", password: "Heroe123!", especializacion: "Tecnología", rol: "heroe" },
+    { nombre: "Doctora Paz", email: "paz@correo.com", password: "Heroe123!", especializacion: "Psicología", rol: "heroe" }
+  ]));
+}
+if (!localStorage.getItem('tareas')) {
+  localStorage.setItem('tareas', JSON.stringify([
+    { titulo: "Ayuda con ensayo", descripcion: "Necesito ayuda con un ensayo de literatura.", tema: "Literatura", fecha: "2025-06-25", estado: "Sin Asignar" },
+    { titulo: "Revisión de ortografía", descripcion: "Revisar ortografía de mi tarea.", tema: "Ortografía", fecha: "2025-06-26", estado: "Asignada", heroe: "capitan@correo.com" },
+    { titulo: "Consejo psicológico", descripcion: "Busco orientación emocional.", tema: "Psicología", fecha: "2025-06-20", estado: "Finalizada", heroe: "paz@correo.com", comentarioHeroe: "¡Ánimo, sigue adelante!" }
+  ]));
+}
+
 // Activación de la plataforma
 console.log("Avengers Colombia - Plataforma activa");
 
