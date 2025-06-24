@@ -177,6 +177,19 @@ function mostrarTareasPublicadas() {
 }
 
 function generarTablaTareas() {
+  const especializaciones = [
+    "Literatura",
+    "Tecnología",
+    "Psicología",
+    "Ortografía",
+    "Cultura ciudadana",
+    "Historia",
+    "Geografía",
+    "Educación",
+    "Humor educativo",
+    "Otros"
+  ];
+
   let tabla = `<table>
     <thead>
       <tr>
