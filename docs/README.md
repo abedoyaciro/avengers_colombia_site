@@ -6,7 +6,11 @@ Equipo 19 - Proyecto de Desarrollo Web - 2025-1
 
 ## 📘 Requisitos del Sistema
 
-[Ver documento PDF](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/requisitos.pdf) (Se corrigió el requisito relacionado a la contraseña)
+[Ver documento PDF de requisitos](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/requisitos.pdf)
+
+### 📝 Actualizaciones de Requisitos *23/06/2025*
+
+- **Contraseña:** Se actualizó el requisito de contraseña. Ahora debe tener al menos 8 caracteres, incluir al menos un número y un carácter especial.
 
 ---
 
