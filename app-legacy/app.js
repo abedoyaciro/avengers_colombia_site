@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Agregar clase especial al <nav>
       const nav = document.querySelector('nav');
-      if (nav) nav.classList.add('nav-heroe');
-    }
-
+      if (nav) nav.classList.add('nav-heroe');  
+      }
+    
     // Cambiar el título del <h1> en el header
     const headerTitle = document.querySelector('header h1');
     if (headerTitle) {
@@ -227,14 +227,14 @@ function generarTablaTareas() {
         <td>${tarea.estado}</td>
         <td>
           ${tarea.estado === 'Sin Asignar'
-        ? `
+            ? `
                 <button onclick="guardarCambiosValidando(${index})">Guardar</button>
                 <button onclick="eliminarTarea(${index})">Eliminar</button>
               `
-        : tarea.estado === 'Finalizada'
-          ? `<button onclick="verDetalle(${index})">Ver Detalles</button>`
-          : ''
-      }
+            : tarea.estado === 'Finalizada'
+              ? `<button onclick="verDetalle(${index})">Ver Detalles</button>`
+              : ''
+          }
         </td>
       </tr>`;
   });
