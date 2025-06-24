@@ -242,6 +242,47 @@ function generarTablaTareas() {
   return tabla + '</tbody></table>';
 }
 
+// Nueva función para validar campos antes de guardar
+function guardarCambiosValidando(index) {
+  const fila = document.querySelectorAll('tbody tr')[index];
+  const celdas = fila.querySelectorAll('td');
+  const select = fila.querySelector('select');
+  const fechaInput = fila.querySelector('input[type="date"]');
+
+  // Validar campos vacíos
+  if (
+    !celdas[0].innerText.trim() ||
+    !celdas[1].innerText.trim() ||
+    (select && !select.value) ||
+    (fechaInput && !fechaInput.value)
+  ) {
+    alert('Ningún campo puede quedar vacío.');
+    return;
+  }
+
+  // Validar que la fecha no sea anterior a hoy
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const fechaIngresada = new Date(fechaInput.value);
+  if (fechaIngresada < hoy) {
+    alert('La fecha no puede ser anterior a la actual.');
+    return;
+  }
+
+  tareas[index] = {
+    ...tareas[index],
+    titulo: celdas[0].innerText.trim(),
+    descripcion: celdas[1].innerText.trim(),
+    especializacion: select ? select.value : tareas[index].especializacion,
+    tema: select ? select.value : tareas[index].tema,
+    fecha: fechaInput ? fechaInput.value : tareas[index].fecha
+  };
+
+  localStorage.setItem('tareas', JSON.stringify(tareas));
+  alert('Cambios guardados exitosamente.');
+  mostrarTareasPublicadas();
+}
+
 function guardarCambios(index) {
   const fila = document.querySelectorAll('tbody tr')[index];
   const celdas = fila.querySelectorAll('td');
