@@ -220,10 +220,10 @@ function generarTablaTareas() {
 
     tabla += `
       <tr>
-        <td contenteditable="${tarea.estado === 'Sin Asignar'}">${tarea.titulo}</td>
-        <td contenteditable="${tarea.estado === 'Sin Asignar'}">${tarea.descripcion}</td>
-        <td contenteditable="${tarea.estado === 'Sin Asignar'}">${tarea.tema}</td>
-        <td contenteditable="${tarea.estado === 'Sin Asignar'}">${tarea.fecha}</td>
+        <td contenteditable="${tarea.estado === 'Sin Asignar'}" data-required="true">${tarea.titulo}</td>
+        <td contenteditable="${tarea.estado === 'Sin Asignar'}" data-required="true">${tarea.descripcion}</td>
+        <td>${tarea.estado === 'Sin Asignar' ? selectHtml : especializacionActual}</td>
+        <td>${fechaInput}</td>
         <td>${tarea.estado}</td>
         <td>
           ${tarea.estado === 'Sin Asignar'
