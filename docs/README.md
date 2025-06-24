@@ -19,8 +19,8 @@ Equipo 19 - Proyecto de Desarrollo Web - 2025-1
 
 ## 🧩 Modelo Entidad-Relación
 
-* [Ver diagrama ER](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/diagrama_er.svg)
-* [Ver modelo con notas en dbdiagram.io](https://dbdiagram.io/d/Avengers-Colombia-681fa8605b2fc4582f0a6a2c)
+- [Ver diagrama ER](https://github.com/abedoyaciro/avengers_colombia_site/blob/main/docs/assets/diagrama_er.svg)
+- [Ver modelo con notas en dbdiagram.io](https://dbdiagram.io/d/Avengers-Colombia-681fa8605b2fc4582f0a6a2c)
 
 **Nota:** En el modelo E-R se usa el término *especialización* en lugar de *tema de interés*, ya que hace referencia a la relación con el héroe, aunque conceptualmente representan lo mismo.
 
