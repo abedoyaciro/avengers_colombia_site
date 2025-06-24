@@ -149,6 +149,15 @@ if (tareaForm) {
     const tema = document.getElementById('tema').value;
     const fecha = document.getElementById('fecha').value;
 
+    // Validar que la fecha no sea anterior a hoy
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    const fechaIngresada = new Date(fecha);
+    if (fechaIngresada < hoy) {
+      alert('La fecha no puede ser anterior a la actual.');
+      return;
+    }
+
     tareas.push({ titulo, descripcion, tema, fecha, estado: 'Sin Asignar' });
     localStorage.setItem('tareas', JSON.stringify(tareas));
 
