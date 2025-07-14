@@ -213,6 +213,7 @@ button:hover,
 
 .hero-buttons a.login:hover {
   background-color: #002437;
+  color: white;
 }
 
 .hero-buttons a.register {
@@ -221,7 +222,8 @@ button:hover,
 }
 
 .hero-buttons a.register:hover {
-  background-color: #fdc181;
+  background-color: #da7100;
+  color: white;
 }
 
 /* === TAREAS === */
