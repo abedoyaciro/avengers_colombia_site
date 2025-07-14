@@ -1,3 +1,81 @@
+## **Pasos para Ejecutar el Proyecto**
+
+Para poner en marcha la aplicación completa (frontend y backend), sigue estos pasos:
+
+### **1. Iniciar el Backend (Servidor Node.js)**
+
+El backend es el encargado de proveer los datos y la lógica de autenticación (login, tareas, etc.) a tu frontend.
+
+1.  **Navega a la carpeta del backend:**
+    ```bash
+    cd backend-node
+    ```
+
+2.  **Instala las dependencias del backend:**
+    Esto descargará todas las librerías necesarias para que el servidor funcione (como Express y CORS).
+    ```bash
+    npm install
+    ```
+
+3.  **Inicia el servidor Node.js:**
+    ```bash
+    npm start
+    ```
+    Verás un mensaje en la terminal indicando que el servidor está escuchando, probablemente en `http://localhost:3000`. **Deja esta terminal abierta** mientras uses la aplicación.
+
+<!-- ### **2. Servir el Frontend (Páginas HTML)**
+
+Tu frontend consta de archivos HTML estáticos que necesitan ser servidos a través de un servidor web para funcionar correctamente (especialmente para evitar problemas de CORS y manejo de rutas).
+
+**Opción A: Usar un servidor estático simple (Recomendado para pruebas rápidas)**
+
+Esta opción es la más sencilla y no requiere modificar tu backend.
+
+1.  **Instala `serve` globalmente** (si no lo tienes ya). Esto solo necesita hacerse una vez en tu máquina:
+    ```bash
+    npm install -g serve
+    ```
+
+2.  **Abre una nueva terminal** (sin cerrar la del backend).
+
+3.  **Navega a la carpeta principal de tu proyecto** (la que contiene `app-legacy`, `backend-node`, etc.):
+    ```bash
+    cd <ruta-a-tu-proyecto-raiz>
+    ```
+    (Si estás en `backend-node`, simplemente `cd ..`)
+
+4.  **Inicia el servidor para tu frontend:**
+    ```bash
+    serve app-legacy -l 5000
+    ```
+    Verás un mensaje indicando que el frontend está sirviéndose, probablemente en `http://localhost:5000`.
+
+5.  **Abre tu navegador** y visita una de las páginas principales de tu frontend, por ejemplo:
+    * `http://localhost:5000/login.html`
+    * `http://localhost:5000/mis-tareas.html` (una vez logeado, si tu login simula redirección)
+
+**Opción B: Servir el frontend desde el mismo backend (Si ya lo configuraste así)**
+
+Si has movido tu carpeta `app-legacy` dentro de `backend-node/public` y configuraste Express para servir archivos estáticos (como se explicó en la respuesta anterior), entonces no necesitas el paso `serve`. Simplemente el backend ya estaría sirviendo todo.
+
+1.  Asegúrate de que `app-legacy` esté en `backend-node/public`.
+2.  Inicia el backend siguiendo los pasos de la sección "1. Iniciar el Backend".
+3.  Abre tu navegador y visita la URL donde tu backend sirve los archivos estáticos (ej., `http://localhost:3000/login.html`).
+
+---
+
+## **¡Listo para Probar!**
+
+Una vez que ambos servidores (backend y frontend) estén corriendo, tu aplicación estará funcional. Podrás interactuar con tu frontend y las solicitudes HTTP se enviarán al backend de Node.js. -->
+
+---
+
+### **Para Detener la Aplicación**
+
+En cada terminal donde tengas un servidor corriendo (backend y `serve`), presiona `Ctrl + C`.
+
+---
+
 # 🦸‍♂️ Avengers Colombia
 
 ## Equipo de Desarrollo
