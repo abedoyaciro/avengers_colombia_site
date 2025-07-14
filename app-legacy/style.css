@@ -300,3 +300,442 @@ nav a {
 nav a:hover {
   text-decoration: underline;
 }
+
+/* === PANEL KANBAN === */
+.kanban-col {
+  min-height: 400px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #fcbf49;
+}
+
+body.modo-heroe .kanban-col {
+  background-color: rgba(255, 243, 176, 0.8);
+  border: 2px solid #003049;
+}
+
+#kanban h4 {
+  color: #003049;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: rgba(252, 191, 73, 0.3);
+  border-radius: 6px;
+}
+
+body.modo-heroe #kanban h4 {
+  background-color: rgba(0, 48, 73, 0.1);
+  color: #003049;
+}
+
+.kanban-task {
+  background-color: white;
+  border-left: 4px solid #f77f00;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: move;
+  transition: all 0.3s ease;
+}
+
+.kanban-task:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+body.modo-heroe .kanban-task {
+  background-color: #fff;
+  border-left: 4px solid #003049;
+}
+
+.kanban-task h5 {
+  color: #003049;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.kanban-task p {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.kanban-task .task-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Responsive para el header del kanban */
+@media (max-width: 768px) {
+  .nav-heroe .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-heroe h1 {
+    text-align: center;
+  }
+  
+  #kanban .col-md-4 {
+    margin-bottom: 2rem;
+  }
+}
+
+/* === ELEMENTOS ESPECÍFICOS DEL KANBAN === */
+.kanban-empty {
+  background-color: rgba(248, 249, 250, 0.8);
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+body.modo-heroe .kanban-empty {
+  background-color: rgba(255, 243, 176, 0.5);
+  border-color: #fcbf49;
+  color: #003049;
+}
+
+.kanban-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.6rem;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  resize: vertical;
+  background-color: #fff;
+}
+
+body.modo-heroe .kanban-textarea {
+  border-color: #fcbf49;
+  background-color: #fff3b0;
+}
+
+.kanban-textarea:focus {
+  outline: none;
+  border-color: #f77f00;
+  box-shadow: 0 0 0 2px rgba(247, 127, 0, 0.2);
+}
+
+body.modo-heroe .kanban-textarea:focus {
+  border-color: #003049;
+  box-shadow: 0 0 0 2px rgba(0, 48, 73, 0.2);
+}
+
+.btn-finalizar {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.btn-finalizar:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+body.modo-heroe .btn-finalizar {
+  background-color: #003049;
+  color: #fff3b0;
+}
+
+body.modo-heroe .btn-finalizar:hover {
+  background-color: #001d33;
+}
+
+/* === MEJORAS GENERALES DE CONSISTENCIA === */
+.task-item button,
+.kanban-task button {
+  margin-top: 1rem;
+  margin-right: 0;
+  padding: 0.6rem 1.2rem;
+  background-color: #f77f00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.task-item button:hover,
+.kanban-task button:hover {
+  background-color: #d95d00;
+  transform: translateY(-1px);
+}
+
+body.modo-heroe .task-item button,
+body.modo-heroe .kanban-task button {
+  background-color: #003049;
+  color: #fff3b0;
+}
+
+body.modo-heroe .task-item button:hover,
+body.modo-heroe .kanban-task button:hover {
+  background-color: #001d33;
+}
+
+/* === CONSISTENCIA EN TEXTAREAS === */
+textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.6rem;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  resize: vertical;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+body.modo-heroe textarea {
+  border-color: #fcbf49;
+  background-color: #fff3b0;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #f77f00;
+  box-shadow: 0 0 0 2px rgba(247, 127, 0, 0.2);
+}
+
+body.modo-heroe textarea:focus {
+  border-color: #003049;
+  box-shadow: 0 0 0 2px rgba(0, 48, 73, 0.2);
+}
+
+/* === LAYOUT DEL KANBAN SIN BOOTSTRAP === */
+.kanban-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.kanban-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #003049;
+}
+
+.kanban-header .logout {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.kanban-main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.kanban-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.kanban-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-column h4 {
+  color: #003049;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: rgba(252, 191, 73, 0.3);
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+
+body.modo-heroe .kanban-column h4 {
+  background-color: rgba(0, 48, 73, 0.1);
+  color: #003049;
+}
+
+/* === RESPONSIVE MEJORADO === */
+@media (max-width: 768px) {
+  .kanban-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .kanban-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .kanban-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .kanban-col {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanban-main {
+    padding: 0 0.5rem;
+  }
+  
+  .kanban-header {
+    padding: 0 0.5rem;
+  }
+  
+  .kanban-header h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* === SISTEMA DE NOTIFICACIONES PERSONALIZADO === */
+.notification-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.notification-modal {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: modalAppear 0.3s ease-out;
+}
+
+body.modo-heroe .notification-modal {
+  background-color: #fff3b0;
+  border: 2px solid #fcbf49;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.notification-modal h3 {
+  color: #003049;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.notification-modal p {
+  color: #333;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+body.modo-heroe .notification-modal p {
+  color: #003049;
+}
+
+.notification-modal .notification-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.notification-modal button {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notification-modal .btn-primary {
+  background-color: #f77f00;
+  color: white;
+}
+
+.notification-modal .btn-primary:hover {
+  background-color: #d95d00;
+}
+
+body.modo-heroe .notification-modal .btn-primary {
+  background-color: #003049;
+  color: #fff3b0;
+}
+
+body.modo-heroe .notification-modal .btn-primary:hover {
+  background-color: #001d33;
+}
+
+.notification-modal .btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.notification-modal .btn-secondary:hover {
+  background-color: #545b62;
+}
+
+/* === MEJORAS EN CONFIRMACIONES === */
+.confirm-modal {
+  background-color: #fff;
+  border-left: 4px solid #d62828;
+}
+
+body.modo-heroe .confirm-modal {
+  background-color: #fff3b0;
+  border-left: 4px solid #fcbf49;
+}
+
+.confirm-modal h3 {
+  color: #d62828;
+}
+
+body.modo-heroe .confirm-modal h3 {
+  color: #003049;
+}

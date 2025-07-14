@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Kanban | Avengers Colombia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="modo-heroe">
+  <header class="p-3">
+    <nav class="nav-heroe">
+      <div class="kanban-header">
+        <h1>Panel del Héroe - Kanban</h1>
+        <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="kanban-main">
+    <div class="kanban-container" id="kanban">
+      <div class="kanban-column">
+        <h4>🟡 Sin Asignar</h4>
+        <div id="columna-sin-asignar" class="kanban-col"></div>
+      </div>
+      <div class="kanban-column">
+        <h4>🔵 Asignadas</h4>
+        <div id="columna-asignadas" class="kanban-col"></div>
+      </div>
+      <div class="kanban-column">
+        <h4>🟢 Finalizadas</h4>
+        <div id="columna-finalizadas" class="kanban-col"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    mostrarPanelKanban();
+  </script>
+</body>
+</html>

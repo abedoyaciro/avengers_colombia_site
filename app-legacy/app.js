@@ -22,6 +22,85 @@ if (!localStorage.getItem('tareas')) {
 // Activación de la plataforma
 console.log("Avengers Colombia - Plataforma activa");
 
+// === SISTEMA DE NOTIFICACIONES PERSONALIZADO ===
+function mostrarNotificacion(mensaje, tipo = 'info', callback = null) {
+  // Remover notificación existente si hay alguna
+  const existente = document.querySelector('.notification-overlay');
+  if (existente) {
+    existente.remove();
+  }
+
+  const overlay = document.createElement('div');
+  overlay.className = 'notification-overlay';
+  
+  const modal = document.createElement('div');
+  modal.className = `notification-modal ${tipo === 'confirm' ? 'confirm-modal' : ''}`;
+  
+  const titulo = tipo === 'error' ? '⚠️ Error' : 
+                tipo === 'success' ? '✅ Éxito' : 
+                tipo === 'confirm' ? '❓ Confirmación' : 
+                '💡 Información';
+  
+  modal.innerHTML = `
+    <h3>${titulo}</h3>
+    <p>${mensaje}</p>
+    <div class="notification-buttons">
+      ${tipo === 'confirm' ? 
+        `<button class="btn-secondary" onclick="cerrarNotificacion(false)">Cancelar</button>
+         <button class="btn-primary" onclick="cerrarNotificacion(true)">Confirmar</button>` :
+        `<button class="btn-primary" onclick="cerrarNotificacion()">Aceptar</button>`
+      }
+    </div>
+  `;
+  
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+  
+  // Guardar callback para confirmaciones
+  if (tipo === 'confirm' && callback) {
+    window.notificationCallback = callback;
+  }
+  
+  // Auto-cerrar después de 5 segundos para info/success
+  if (tipo === 'info' || tipo === 'success') {
+    setTimeout(() => {
+      if (document.querySelector('.notification-overlay')) {
+        cerrarNotificacion();
+      }
+    }, 5000);
+  }
+}
+
+function cerrarNotificacion(resultado = null) {
+  const overlay = document.querySelector('.notification-overlay');
+  if (overlay) {
+    overlay.remove();
+  }
+  
+  // Ejecutar callback si es confirmación
+  if (window.notificationCallback && resultado !== null) {
+    window.notificationCallback(resultado);
+    window.notificationCallback = null;
+  }
+}
+
+// Funciones de conveniencia
+function mostrarExito(mensaje) {
+  mostrarNotificacion(mensaje, 'success');
+}
+
+function mostrarError(mensaje) {
+  mostrarNotificacion(mensaje, 'error');
+}
+
+function mostrarInfo(mensaje) {
+  mostrarNotificacion(mensaje, 'info');
+}
+
+function confirmar(mensaje, callback) {
+  mostrarNotificacion(mensaje, 'confirm', callback);
+}
+
 const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
 const usuarioActivo = localStorage.getItem('usuarioActivo');
 
@@ -55,10 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Redirigir a la página correspondiente según el rol
-    if (window.location.pathname.endsWith('index.html')) {
+    if (window.location.pathname.endsWith('/') || window.location.pathname.endsWith('/index.html')) {
       datos.rol === 'heroe' ?
-        window.location.href = 'app-legacy/tareas-heroe.html' :
-        window.location.href = 'app-legacy/mis-tareas.html';
+      window.location.href = 'app-legacy/panel-kanban.html' :
+      window.location.href = 'app-legacy/mis-tareas.html';
     }
 
   }
@@ -68,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ---------- Función general para cerrar sesión ----------
 function cerrarSesion() {
   localStorage.removeItem('usuarioActivo');
-  window.location.href = '../index.html';
+  window.location.href = '../';
 }
 
 // ---------- Inicio de sesión ----------
@@ -86,11 +165,13 @@ if (loginForm) {
     const encontrado = [...users, ...heroes].find(u => u.email === email && u.password === password);
 
     if (encontrado) {
-      alert('¡Bienvenido, ' + encontrado.nombre + '!');
+      mostrarExito('¡Bienvenido, ' + encontrado.nombre + '!');
       localStorage.setItem('usuarioActivo', encontrado.email);
-      window.location.href = encontrado.rol === 'heroe' ? 'tareas-heroe.html' : 'mis-tareas.html';
+      setTimeout(() => {
+        window.location.href = encontrado.rol === 'heroe' ? 'panel-kanban.html' : 'mis-tareas.html';
+      }, 1500);
     } else {
-      alert('Correo o contraseña incorrectos');
+      mostrarError('Correo o contraseña incorrectos');
     }
   });
 }
@@ -110,14 +191,14 @@ if (registroFormUnico) {
 
     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
     if (!passwordRegex.test(password)) {
-      alert('La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.');
+      mostrarError('La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.');
       return;
     }
 
     if (rol === 'usuario') {
       const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
       if (usuarios.some(u => u.email === email)) {
-        alert('Este correo ya está registrado.');
+        mostrarError('Este correo ya está registrado.');
         return;
       }
       usuarios.push({ nombre, email, password, ubicacion, rol });
@@ -125,18 +206,20 @@ if (registroFormUnico) {
     } else if (rol === 'heroe') {
       const heroes = JSON.parse(localStorage.getItem('heroes')) || [];
       if (heroes.some(h => h.email === email)) {
-        alert('Este correo ya está registrado.');
+        mostrarError('Este correo ya está registrado.');
         return;
       }
       heroes.push({ nombre, email, password, especializacion, rol });
       localStorage.setItem('heroes', JSON.stringify(heroes));
     } else {
-      alert('Debes seleccionar un rol válido.');
+      mostrarError('Debes seleccionar un rol válido.');
       return;
     }
 
-    alert('Registro exitoso. Ahora puedes iniciar sesión.');
-    window.location.href = 'login.html';
+    mostrarExito('Registro exitoso. Ahora puedes iniciar sesión.');
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 2000);
   });
 }
 
@@ -223,15 +306,17 @@ if (tareaForm) {
     hoy.setHours(0, 0, 0, 0);
     const fechaIngresada = new Date(fecha);
     if (fechaIngresada < hoy) {
-      alert('La fecha no puede ser anterior a la actual.');
+      mostrarError('La fecha no puede ser anterior a la actual.');
       return;
     }
 
     tareas.push({ titulo, descripcion, tema, fecha, estado: 'Sin Asignar' });
     localStorage.setItem('tareas', JSON.stringify(tareas));
 
-    alert('Tarea publicada con éxito.');
-    window.location.href = 'mis-tareas.html';
+    mostrarExito('Tarea publicada con éxito.');
+    setTimeout(() => {
+      window.location.href = 'mis-tareas.html';
+    }, 1500);
   });
 }
 
@@ -325,7 +410,7 @@ function guardarCambiosValidando(index) {
     (select && !select.value) ||
     (fechaInput && !fechaInput.value)
   ) {
-    alert('Ningún campo puede quedar vacío.');
+    mostrarError('Ningún campo puede quedar vacío.');
     return;
   }
 
@@ -334,7 +419,7 @@ function guardarCambiosValidando(index) {
   hoy.setHours(0, 0, 0, 0);
   const fechaIngresada = new Date(fechaInput.value);
   if (fechaIngresada < hoy) {
-    alert('La fecha no puede ser anterior a la actual.');
+    mostrarError('La fecha no puede ser anterior a la actual.');
     return;
   }
 
@@ -348,8 +433,10 @@ function guardarCambiosValidando(index) {
   };
 
   localStorage.setItem('tareas', JSON.stringify(tareas));
-  alert('Cambios guardados exitosamente.');
-  mostrarTareasPublicadas();
+  mostrarExito('Cambios guardados exitosamente.');
+  setTimeout(() => {
+    mostrarTareasPublicadas();
+  }, 1000);
 }
 
 function guardarCambios(index) {
@@ -370,11 +457,14 @@ function guardarCambios(index) {
 }
 
 function eliminarTarea(index) {
-  if (confirm('¿Eliminar esta tarea?')) {
-    tareas.splice(index, 1);
-    localStorage.setItem('tareas', JSON.stringify(tareas));
-    mostrarTareasPublicadas();
-  }
+  confirmar('¿Estás seguro de que deseas eliminar esta tarea?', (confirmado) => {
+    if (confirmado) {
+      tareas.splice(index, 1);
+      localStorage.setItem('tareas', JSON.stringify(tareas));
+      mostrarTareasPublicadas();
+      mostrarExito('Tarea eliminada exitosamente.');
+    }
+  });
 }
 
 // ---------- Mostrar tareas disponibles ----------
@@ -441,7 +531,7 @@ function mostrarAsignadas() {
 function marcarFinalizada(titulo, indexTextarea) {
   const comentario = document.getElementById(`comentario-${indexTextarea}`).value.trim();
   if (!comentario) {
-    alert('Escribe un comentario.');
+    mostrarError('Debes escribir un comentario antes de finalizar la tarea.');
     return;
   }
 
@@ -451,6 +541,7 @@ function marcarFinalizada(titulo, indexTextarea) {
     tareas[index].comentarioHeroe = comentario;
     localStorage.setItem('tareas', JSON.stringify(tareas));
     mostrarAsignadas();
+    mostrarExito('Tarea marcada como finalizada exitosamente.');
   }
 }
 
@@ -485,6 +576,85 @@ function verDetalle(index) {
   localStorage.setItem('tareaSeleccionada', JSON.stringify(tareas[index]));
   window.location.href = 'detalle-tarea.html';
 }
+
+// ---------- Mostrar panel Kanban ----------
+function mostrarPanelKanban() {
+  const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+  const usuarioActivo = localStorage.getItem('usuarioActivo');
+
+  const sinAsignar = tareas.filter(t => t.estado === 'Sin Asignar');
+  const asignadas = tareas.filter(t => t.estado === 'Asignada' && t.heroe === usuarioActivo);
+  const finalizadas = tareas.filter(t => t.estado === 'Finalizada' && t.heroe === usuarioActivo);
+
+  renderizarColumna('columna-sin-asignar', sinAsignar, 'sinAsignar');
+  renderizarColumna('columna-asignadas', asignadas, 'asignada');
+  renderizarColumna('columna-finalizadas', finalizadas, 'finalizada');
+}
+
+// ---------- Renderizar columnas del Kanban ----------
+function renderizarColumna(idContenedor, lista, tipo) {
+  const contenedor = document.getElementById(idContenedor);
+  if (!contenedor) return;
+
+  if (lista.length === 0) {
+    contenedor.innerHTML = `<div class="kanban-empty">No hay tareas en esta columna.</div>`;
+    return;
+  }
+
+  contenedor.innerHTML = lista.map((t, i) => `
+    <div class="kanban-task">
+      <h5>${t.titulo}</h5>
+      <p><strong>Descripción:</strong> ${t.descripcion}</p>
+      <p><strong>Tema:</strong> ${t.tema}</p>
+      <p><strong>Fecha:</strong> ${t.fecha}</p>
+      ${tipo === 'sinAsignar' ? `<button onclick="asignarTareaKanban('${t.titulo}')">Aceptar Tarea</button>` : ''}
+      ${tipo === 'asignada' ? `
+        <textarea id="comentario-${i}" placeholder="Comentario del héroe..." class="kanban-textarea"></textarea>
+        <button onclick="finalizarTareaKanban('${t.titulo}', ${i})" class="btn-finalizar">Finalizar Tarea</button>
+      ` : ''}
+      ${tipo === 'finalizada' ? `<div class="hero-comment-box">${t.comentarioHeroe || 'Sin comentario'}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+// ---------- Asignar tarea en Kanban ----------
+function asignarTareaKanban(titulo) {
+  const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+  const usuarioActivo = localStorage.getItem('usuarioActivo');
+  const i = tareas.findIndex(t => t.titulo === titulo && t.estado === 'Sin Asignar');
+  if (i !== -1) {
+    tareas[i].estado = 'Asignada';
+    tareas[i].heroe = usuarioActivo;
+    localStorage.setItem('tareas', JSON.stringify(tareas));
+    mostrarPanelKanban();
+  }
+}
+
+// ---------- Finalizar tarea en Kanban ----------
+function finalizarTareaKanban(titulo, i) {
+  const comentario = document.getElementById(`comentario-${i}`).value.trim();
+  if (!comentario) {
+    mostrarError("Por favor escribe un comentario antes de finalizar la tarea.");
+    return;
+  }
+  const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+  const usuarioActivo = localStorage.getItem('usuarioActivo');
+  const idx = tareas.findIndex(t => t.titulo === titulo && t.heroe === usuarioActivo && t.estado === 'Asignada');
+  if (idx !== -1) {
+    tareas[idx].estado = 'Finalizada';
+    tareas[idx].comentarioHeroe = comentario;
+    localStorage.setItem('tareas', JSON.stringify(tareas));
+    mostrarPanelKanban();
+    mostrarExito('Tarea finalizada exitosamente.');
+  }
+}
+
+// ---------- Inicializar el panel Kanban si existe ----------
+const panelKanban = document.getElementById('panelKanban');
+if (panelKanban) {
+  mostrarPanelKanban();
+}
+
 
 
 // ---------- Inicializar las vistas dinámicas si existen ----------
