@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const usuarioActivo = localStorage.getItem('usuarioActivo');
   const datos = [...usuarios, ...heroes].find(u => u.email === usuarioActivo);
 
+  // Si hay un usuario activo, mostrar su información
   if (datos) {
 
 
@@ -94,70 +95,117 @@ if (loginForm) {
   });
 }
 
-// ---------- Registro de usuario ----------
-const registerUserForm = document.getElementById('registerUserForm');
-if (registerUserForm) {
-  registerUserForm.addEventListener('submit', function (e) {
+// ---------- Registro de usuario y héroe ----------
+const registroFormUnico = document.getElementById('registroForm');
+if (registroFormUnico) {
+  registroFormUnico.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    const rol = document.getElementById('rol').value;
     const nombre = document.getElementById('nombre').value;
     const email = document.getElementById('email').value;
-    const ubicacion = document.getElementById('ubicacion').value;
-
     const password = document.getElementById('password').value;
-    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+    const ubicacion = document.getElementById('ubicacion')?.value;
+    const especializacion = document.getElementById('especializacion')?.value;
 
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
     if (!passwordRegex.test(password)) {
       alert('La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.');
       return;
     }
 
-    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-
-    if (usuarios.some(u => u.email === email)) {
-      alert('Este correo ya está registrado.');
+    if (rol === 'usuario') {
+      const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+      if (usuarios.some(u => u.email === email)) {
+        alert('Este correo ya está registrado.');
+        return;
+      }
+      usuarios.push({ nombre, email, password, ubicacion, rol });
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    } else if (rol === 'heroe') {
+      const heroes = JSON.parse(localStorage.getItem('heroes')) || [];
+      if (heroes.some(h => h.email === email)) {
+        alert('Este correo ya está registrado.');
+        return;
+      }
+      heroes.push({ nombre, email, password, especializacion, rol });
+      localStorage.setItem('heroes', JSON.stringify(heroes));
+    } else {
+      alert('Debes seleccionar un rol válido.');
       return;
     }
 
-    usuarios.push({ nombre, email, password, ubicacion, rol: 'usuario' });
-    localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-    alert('Usuario registrado con éxito. Puedes iniciar sesión.');
+    alert('Registro exitoso. Ahora puedes iniciar sesión.');
     window.location.href = 'login.html';
   });
 }
 
-// ---------- Registro de héroe ----------
-const registerHeroForm = document.getElementById('registerHeroForm');
-if (registerHeroForm) {
-  registerHeroForm.addEventListener('submit', function (e) {
-    e.preventDefault();
 
-    const nombre = document.getElementById('nombre').value;
-    const email = document.getElementById('email').value;
-    const especializacion = document.getElementById('especializacion').value;
-    const password = document.getElementById('password').value;
-    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
 
-    if (!passwordRegex.test(password)) {
-      alert('La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.');
-      return;
-    }
+// // ---------- Registro de usuario ----------
+// const registerUserForm = document.getElementById('registerUserForm');
+// if (registerUserForm) {
+//   registerUserForm.addEventListener('submit', function (e) {
+//     e.preventDefault();
 
-    const heroes = JSON.parse(localStorage.getItem('heroes')) || [];
+//     const nombre = document.getElementById('nombre').value;
+//     const email = document.getElementById('email').value;
+//     const ubicacion = document.getElementById('ubicacion').value;
 
-    if (heroes.some(h => h.email === email)) {
-      alert('Este correo ya está registrado.');
-      return;
-    }
+//     const password = document.getElementById('password').value;
+//     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
 
-    heroes.push({ nombre, email, password, especializacion, rol: 'heroe' });
-    localStorage.setItem('heroes', JSON.stringify(heroes));
+//     if (!passwordRegex.test(password)) {
+//       alert('La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.');
+//       return;
+//     }
 
-    alert('Héroe registrado con éxito. Puedes iniciar sesión.');
-    window.location.href = 'login.html';
-  });
-}
+//     const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+//     if (usuarios.some(u => u.email === email)) {
+//       alert('Este correo ya está registrado.');
+//       return;
+//     }
+
+//     usuarios.push({ nombre, email, password, ubicacion, rol: 'usuario' });
+//     localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+//     alert('Usuario registrado con éxito. Puedes iniciar sesión.');
+//     window.location.href = 'login.html';
+//   });
+// }
+
+// // ---------- Registro de héroe ----------
+// const registerHeroForm = document.getElementById('registerHeroForm');
+// if (registerHeroForm) {
+//   registerHeroForm.addEventListener('submit', function (e) {
+//     e.preventDefault();
+
+//     const nombre = document.getElementById('nombre').value;
+//     const email = document.getElementById('email').value;
+//     const especializacion = document.getElementById('especializacion').value;
+//     const password = document.getElementById('password').value;
+//     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+
+//     if (!passwordRegex.test(password)) {
+//       alert('La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.');
+//       return;
+//     }
+
+//     const heroes = JSON.parse(localStorage.getItem('heroes')) || [];
+
+//     if (heroes.some(h => h.email === email)) {
+//       alert('Este correo ya está registrado.');
+//       return;
+//     }
+
+//     heroes.push({ nombre, email, password, especializacion, rol: 'heroe' });
+//     localStorage.setItem('heroes', JSON.stringify(heroes));
+
+//     alert('Héroe registrado con éxito. Puedes iniciar sesión.');
+//     window.location.href = 'login.html';
+//   });
+// }
 
 // ---------- Publicación de tareas ----------
 const tareaForm = document.getElementById('tareaForm');
