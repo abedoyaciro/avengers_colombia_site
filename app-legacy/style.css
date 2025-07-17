@@ -339,7 +339,7 @@ body.modo-heroe #kanban h4 {
   margin-bottom: 1rem;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  cursor: move;
+  cursor: default;
   transition: all 0.3s ease;
 }
 
@@ -409,8 +409,8 @@ body.modo-heroe .kanban-empty {
 }
 
 .kanban-textarea {
-  width: 100%;
-  min-height: 80px;
+  width: 90%;
+  min-height: 50px;
   padding: 0.6rem;
   border: 2px solid #ccc;
   border-radius: 6px;
@@ -499,8 +499,8 @@ body.modo-heroe .kanban-task button:hover {
 
 /* === CONSISTENCIA EN TEXTAREAS === */
 textarea {
-  width: 100%;
-  min-height: 80px;
+  width: 90%;
+  min-height: 50px;
   padding: 0.6rem;
   border: 2px solid #ccc;
   border-radius: 6px;
