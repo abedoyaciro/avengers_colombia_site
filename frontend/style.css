@@ -499,7 +499,7 @@ body.modo-heroe .kanban-task button:hover {
 
 /* === CONSISTENCIA EN TEXTAREAS === */
 textarea {
-  width: 90%;
+  width: 100%;
   min-height: 50px;
   padding: 0.6rem;
   border: 2px solid #ccc;
