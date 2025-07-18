@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Redirigir a la página correspondiente según el rol
     if (window.location.pathname.endsWith('/') || window.location.pathname.endsWith('/index.html')) {
       datos.rol === 'heroe' ?
-      window.location.href = 'app-legacy/panel-kanban.html' :
-      window.location.href = 'app-legacy/mis-tareas.html';
+      window.location.href = 'frontend/panel-heroe.html' :
+      window.location.href = 'frontend/mis-tareas.html';
     }
 
   }

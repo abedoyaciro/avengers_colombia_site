@@ -13,8 +13,8 @@ app.use(express.json());
 
 // --- Configuración para servir archivos estáticos del frontend ---
 
-// Sirve los archivos de la carpeta 'app-legacy' bajo la ruta '/app-legacy'
-app.use('/app-legacy', express.static(path.join(__dirname, '..', 'app-legacy')));
+// Sirve los archivos de la carpeta 'frontend' bajo la ruta '/frontend'
+app.use('/frontend', express.static(path.join(__dirname, '..', 'frontend')));
 
 // Sirve el archivo index.html directamente desde la raíz
 app.get('/', (req, res) => {

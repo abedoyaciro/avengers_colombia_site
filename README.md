@@ -38,7 +38,7 @@ Esta opción es la más sencilla y no requiere modificar tu backend.
 
 2.  **Abre una nueva terminal** (sin cerrar la del backend).
 
-3.  **Navega a la carpeta principal de tu proyecto** (la que contiene `app-legacy`, `backend-node`, etc.):
+3.  **Navega a la carpeta principal de tu proyecto** (la que contiene `frontendgacy`, `backend-node`, etc.):
     ```bash
     cd <ruta-a-tu-proyecto-raiz>
     ```
@@ -46,7 +46,7 @@ Esta opción es la más sencilla y no requiere modificar tu backend.
 
 4.  **Inicia el servidor para tu frontend:**
     ```bash
-    serve app-legacy -l 5000
+    serve frontend -l 5000
     ```
     Verás un mensaje indicando que el frontend está sirviéndose, probablemente en `http://localhost:5000`.
 
@@ -56,9 +56,9 @@ Esta opción es la más sencilla y no requiere modificar tu backend.
 
 **Opción B: Servir el frontend desde el mismo backend (Si ya lo configuraste así)**
 
-Si has movido tu carpeta `app-legacy` dentro de `backend-node/public` y configuraste Express para servir archivos estáticos (como se explicó en la respuesta anterior), entonces no necesitas el paso `serve`. Simplemente el backend ya estaría sirviendo todo.
+Si has movido tu carpeta `frontend` dentro de `backend-node/public` y configuraste Express para servir archivos estáticos (como se explicó en la respuesta anterior), entonces no necesitas el paso `serve`. Simplemente el backend ya estaría sirviendo todo.
 
-1.  Asegúrate de que `app-legacy` esté en `backend-node/public`.
+1.  Asegúrate de que `frontend` esté en `backend-node/public`.
 2.  Inicia el backend siguiendo los pasos de la sección "1. Iniciar el Backend".
 3.  Abre tu navegador y visita la URL donde tu backend sirve los archivos estáticos (ej., `http://localhost:3000/login.html`).
 
