@@ -168,7 +168,7 @@ if (loginForm) {
       mostrarExito('¡Bienvenido, ' + encontrado.nombre + '!');
       localStorage.setItem('usuarioActivo', encontrado.email);
       setTimeout(() => {
-        window.location.href = encontrado.rol === 'heroe' ? 'panel-kanban.html' : 'mis-tareas.html';
+        window.location.href = encontrado.rol === 'heroe' ? 'panel-heroe.html' : 'mis-tareas.html';
       }, 1500);
     } else {
       mostrarError('Correo o contraseña incorrectos');
