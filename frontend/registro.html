@@ -57,7 +57,22 @@
 
         <button type="submit">Registrar</button>
       </form>
-      <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+            <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Avengers Colombia. Conectando héroes con ciudadanos.</p>
+  </footer>
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('rol').addEventListener('change', function () {
+      const rol = this.value;
+      document.getElementById('especializacion-container').style.display = rol === 'heroe' ? 'block' : 'none';
+      document.getElementById('ubicacion-container').style.display = rol === 'usuario' ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>
     </section>
   </main>
 
