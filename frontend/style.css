@@ -67,6 +67,9 @@ body {
   background: var(--color-gray-light);
   color: var(--color-text);
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -86,6 +89,10 @@ a:hover {
 /* ===================================================
    LAYOUT GENERAL
    =================================================== */
+main {
+  flex: 1;
+}
+
 header {
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -93,12 +100,25 @@ header {
   text-align: center;
 }
 
+header h1 {
+  margin: 0;
+  color: var(--color-white);
+  font-size: var(--font-size-xxl);
+  font-weight: 600;
+}
+
 footer {
   background-color: var(--color-primary);
   color: var(--color-white);
   text-align: center;
-  padding: var(--spacing-sm);
-  margin-top: var(--spacing-xl);
+  padding: var(--spacing-md);
+  margin-top: auto;
+}
+
+footer p {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: 500;
 }
 
 nav a {
@@ -406,7 +426,7 @@ td[contenteditable="true"],
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-md);
   background-color: var(--color-primary);
   color: var(--color-white);
 }
@@ -415,6 +435,7 @@ td[contenteditable="true"],
   margin: 0;
   font-size: var(--font-size-xxl);
   color: inherit;
+  font-weight: 600;
 }
 
 .kanban-header .logout {
@@ -442,7 +463,7 @@ td[contenteditable="true"],
 
 .kanban-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr 1fr 1fr;
   gap: var(--spacing-lg);
   margin-top: var(--spacing-lg);
 }
@@ -574,14 +595,29 @@ body.modo-heroe footer {
   color: var(--color-hero-text);
 }
 
+body.modo-heroe header h1 {
+  color: var(--color-hero-text);
+  font-size: var(--font-size-xxl);
+  font-weight: 600;
+}
+
+body.modo-heroe footer p {
+  color: var(--color-hero-text);
+  font-weight: 600;
+  font-size: var(--font-size-base);
+}
+
 /* Kanban en modo héroe */
 body.modo-heroe .kanban-header {
   background-color: var(--color-hero-accent);
   color: var(--color-hero-text);
+  padding: var(--spacing-md);
 }
 
 body.modo-heroe .kanban-header h1 {
   color: var(--color-hero-text);
+  font-size: var(--font-size-xxl);
+  font-weight: 600;
 }
 
 body.modo-heroe .kanban-column h4 {
@@ -742,6 +778,10 @@ body.modo-heroe .btn-primary:hover {
     padding: var(--spacing-sm);
   }
   
+  header h1 {
+    font-size: var(--font-size-lg);
+  }
+  
   /* Kanban responsive */
   .kanban-header {
     flex-direction: column;
@@ -750,16 +790,24 @@ body.modo-heroe .btn-primary:hover {
   }
   
   .kanban-header h1 {
-    font-size: 1.5rem;
+    font-size: var(--font-size-lg);
+  }
+  
+  /* Asegurar que modo héroe tenga mismo tamaño */
+  body.modo-heroe header h1,
+  body.modo-heroe .kanban-header h1 {
+    font-size: var(--font-size-lg);
   }
   
   .kanban-container {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-sm);
+    overflow-x: auto;
   }
   
   .kanban-col {
     min-height: 300px;
+    min-width: 200px;
   }
   
   /* Formularios responsive */
@@ -788,6 +836,10 @@ body.modo-heroe .btn-primary:hover {
 
 @media (max-width: 480px) {
   /* Espaciado reducido para móviles */
+  header h1 {
+    font-size: var(--font-size-base);
+  }
+  
   .kanban-main,
   .form-container,
   .landing-hero {
@@ -800,7 +852,13 @@ body.modo-heroe .btn-primary:hover {
   }
   
   .kanban-header h1 {
-    font-size: 1.3rem;
+    font-size: var(--font-size-base);
+  }
+  
+  /* Asegurar que modo héroe tenga mismo tamaño */
+  body.modo-heroe header h1,
+  body.modo-heroe .kanban-header h1 {
+    font-size: var(--font-size-base);
   }
   
   /* Tablas responsive */
