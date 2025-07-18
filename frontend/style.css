@@ -16,6 +16,10 @@
   --color-hero-bg: #fff3b0;
   --color-hero-accent: #fcbf49;
   --color-hero-text: #003049;
+  --color-hero-danger: #8b1538;
+  --color-hero-danger-dark: #6b1028;
+  --color-hero-success: #1e7e34;
+  --color-hero-success-dark: #155724;
   
   /* Colores neutros */
   --color-white: #ffffff;
@@ -135,10 +139,13 @@ nav a {
 }
 
 /* ===================================================
-   SISTEMA DE BOTONES - Base común
+   SISTEMA DE BOTONES UNIFICADO - Base común
    =================================================== */
 button,
-.btn {
+.btn,
+.landing-buttons a,
+.kanban-header .logout,
+.btn-finalizar {
   margin-top: var(--spacing-sm);
   margin-right: var(--spacing-sm);
   padding: 0.6rem 1.2rem;
@@ -148,33 +155,53 @@ button,
   border-radius: var(--border-radius);
   font-weight: bold;
   font-family: inherit;
+  font-size: var(--font-size-base);
   cursor: pointer;
   transition: all var(--transition-base);
   display: inline-block;
   text-decoration: none;
   text-align: center;
+  box-shadow: var(--box-shadow);
 }
 
 button:hover,
-.btn:hover {
+.btn:hover,
+.landing-buttons a:hover,
+.kanban-header .logout:hover,
+.btn-finalizar:hover {
   background-color: var(--color-secondary-dark);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow-hover);
+  text-decoration: none;
 }
 
-/* Variantes de botones */
-.btn-danger {
+button:active,
+.btn:active,
+.landing-buttons a:active,
+.kanban-header .logout:active,
+.btn-finalizar:active {
+  transform: translateY(0);
+  box-shadow: var(--box-shadow);
+}
+
+/* Variantes de botones - solo colores */
+.btn-danger,
+.kanban-header .logout {
   background-color: var(--color-danger);
 }
 
-.btn-danger:hover {
+.btn-danger:hover,
+.kanban-header .logout:hover {
   background-color: var(--color-danger-dark);
 }
 
-.btn-success {
+.btn-success,
+.btn-finalizar {
   background-color: var(--color-success);
 }
 
-.btn-success:hover {
+.btn-success:hover,
+.btn-finalizar:hover {
   background-color: var(--color-success-dark);
 }
 
@@ -193,6 +220,39 @@ button:hover,
 
 .btn-primary:hover {
   background-color: var(--color-secondary-dark);
+}
+
+/* Botones de landing específicos - solo colores */
+.landing-buttons .btn-login {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.landing-buttons .btn-login:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.landing-buttons .btn-register {
+  background-color: #fdc181;
+  color: var(--color-primary);
+}
+
+.landing-buttons .btn-register:hover {
+  background-color: var(--color-secondary-dark);
+  color: var(--color-white);
+}
+
+/* Botones específicos - ajustes de tamaño */
+.kanban-header .logout {
+  margin: 0;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.btn-finalizar {
+  width: 100%;
+  margin-top: var(--spacing-xs);
+  margin-right: 0;
 }
 
 /* ===================================================
@@ -245,23 +305,11 @@ button:hover,
   resize: vertical;
 }
 
+/* Botones de formulario heredan del sistema base */
 .form-container button {
-  margin-top: var(--spacing-md);
   width: 100%;
-  padding: 0.7rem;
-  font-size: var(--font-size-base);
-  background-color: var(--color-secondary);
-  color: var(--color-white);
-  border: none;
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  cursor: pointer;
-  transition: var(--transition-base);
-}
-
-.form-container button:hover {
-  background-color: var(--color-secondary-dark);
-  transform: translateY(-1px);
+  margin-top: var(--spacing-md);
+  margin-right: 0;
 }
 
 .form-container p {
@@ -377,14 +425,10 @@ td[contenteditable="true"],
   justify-content: center;
 }
 
+/* Botones de modales heredan del sistema base */
 .notification-modal button,
 .confirm-modal button {
   padding: 0.7rem 1.5rem;
-  border: none;
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  cursor: pointer;
-  transition: all var(--transition-base);
 }
 
 /* ===================================================
@@ -413,38 +457,11 @@ td[contenteditable="true"],
   margin-bottom: var(--spacing-lg);
 }
 
+/* Contenedor específico para botones de landing */
 .landing-buttons {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-}
-
-.landing-buttons a {
-  padding: 0.8rem;
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  transition: var(--transition-base);
-  text-align: center;
-  text-decoration: none;
-}
-
-.landing-buttons .btn-login {
-  background-color: var(--color-secondary);
-  color: var(--color-white);
-}
-
-.landing-buttons .btn-login:hover {
-  background-color: var(--color-secondary-dark);
-}
-
-.landing-buttons .btn-register {
-  background-color: #fdc181;
-  color: var(--color-primary);
-}
-
-.landing-buttons .btn-register:hover {
-  background-color: var(--color-secondary-dark);
-  color: var(--color-white);
 }
 
 /* Sistema de Tareas */
@@ -516,22 +533,7 @@ td[contenteditable="true"],
   font-weight: 600;
 }
 
-.kanban-header .logout {
-  margin: 0;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  font-size: var(--font-size-sm);
-  text-decoration: none;
-  display: inline-block;
-  background-color: var(--color-danger);
-  color: var(--color-white);
-  border-radius: var(--border-radius);
-  transition: var(--transition-base);
-}
 
-.kanban-header .logout:hover {
-  background-color: var(--color-danger-dark);
-  text-decoration: none;
-}
 
 .kanban-main {
   max-width: 1200px;
@@ -640,23 +642,7 @@ td[contenteditable="true"],
   box-shadow: 0 0 0 2px rgba(247, 127, 0, 0.2);
 }
 
-.btn-finalizar {
-  background-color: var(--color-success);
-  color: var(--color-white);
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  width: 100%;
-  margin-top: var(--spacing-xs);
-}
 
-.btn-finalizar:hover {
-  background-color: var(--color-success-dark);
-  transform: translateY(-1px);
-}
 
 /* ===================================================
    MODO HÉROE - Sobrescribir colores manteniendo estructura
@@ -720,24 +706,39 @@ body.modo-heroe .kanban-textarea:focus {
 }
 
 /* Botones en modo héroe - solo colores */
-body.modo-heroe .btn-finalizar {
-  background-color: var(--color-primary);
-  color: var(--color-hero-bg);
-}
-
-body.modo-heroe .btn-finalizar:hover {
-  background-color: var(--color-primary-dark);
-}
-
 body.modo-heroe button,
-body.modo-heroe .btn {
+body.modo-heroe .btn,
+body.modo-heroe .landing-buttons a {
   background-color: var(--color-primary);
   color: var(--color-hero-bg);
 }
 
 body.modo-heroe button:hover,
-body.modo-heroe .btn:hover {
+body.modo-heroe .btn:hover,
+body.modo-heroe .landing-buttons a:hover {
   background-color: var(--color-primary-dark);
+}
+
+body.modo-heroe .btn-danger,
+body.modo-heroe .kanban-header .logout {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+
+body.modo-heroe .btn-danger:hover,
+body.modo-heroe .kanban-header .logout:hover {
+  background-color: var(--color-danger-dark);
+}
+
+body.modo-heroe .btn-success,
+body.modo-heroe .btn-finalizar {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+body.modo-heroe .btn-success:hover,
+body.modo-heroe .btn-finalizar:hover {
+  background-color: var(--color-success-dark);
 }
 
 body.modo-heroe .btn-primary {
