@@ -379,6 +379,7 @@ async function mostrarTareasPublicadas() {
 }
 
 function generarTablaTareas(tareas) {
+  // Generar tabla tradicional (para desktop)
   let tabla = `<table>
     <thead>
       <tr>
@@ -411,7 +412,57 @@ function generarTablaTareas(tareas) {
   });
 
   tabla += '</tbody></table>';
-  return tabla;
+
+  // Generar contenedor de tarjetas (para responsive)
+  const tarjetas = generarTarjetasTareas(tareas);
+  
+  return tabla + tarjetas;
+}
+
+function generarTarjetasTareas(tareas) {
+  let contenedorTarjetas = '<div class="tasks-container">';
+  
+  tareas.forEach(tarea => {
+    const estadoClase = tarea.estado.toLowerCase().replace(' ', '-');
+    const estadoTexto = tarea.estado;
+    
+    let acciones = '';
+    if (tarea.estado === 'Sin Asignar') {
+      acciones = `<button class="btn-danger" onclick="eliminarTareaBackend(${tarea.id_tarea})">Eliminar</button>`;
+    } else if (tarea.estado === 'Finalizada') {
+      acciones = `<button class="btn-primary" onclick="verDetalle(${tarea.id_tarea})">Ver Detalles</button>`;
+    }
+    
+    contenedorTarjetas += `
+      <div class="task-card">
+        <div class="task-card-header">
+          <h3>${tarea.titulo}</h3>
+          <span class="task-status ${estadoClase}">${estadoTexto}</span>
+        </div>
+        
+        <div class="task-card-body">
+          <div class="task-detail">
+            <span class="task-detail-label">Descripción:</span>
+            <span class="task-detail-value">${tarea.descripcion}</span>
+          </div>
+          
+          <div class="task-detail">
+            <span class="task-detail-label">Tema:</span>
+            <span class="task-detail-value">${tarea.tema}</span>
+          </div>
+          
+          <div class="task-detail">
+            <span class="task-detail-label">Fecha:</span>
+            <span class="task-detail-value">${formatearFechaEspanol(tarea.fecha_deseada)}</span>
+          </div>
+        </div>
+        
+        ${acciones ? `<div class="task-card-actions">${acciones}</div>` : ''}
+      </div>`;
+  });
+  
+  contenedorTarjetas += '</div>';
+  return contenedorTarjetas;
 }
 
 function verDetalle(id) {

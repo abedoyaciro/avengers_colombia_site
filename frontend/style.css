@@ -389,6 +389,140 @@ tr:hover {
   background-color: #f0f8ff;
 }
 
+/* ===================================================
+   DISEÑO DE TARJETAS PARA MIS TAREAS (RESPONSIVO)
+   =================================================== */
+
+.tasks-container {
+  display: none; /* Oculto por defecto, se muestra en responsive */
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) auto;
+  max-width: 1200px;
+  padding: 0 var(--spacing-sm);
+}
+
+.task-card {
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+  padding: var(--spacing-md);
+  border-left: 4px solid var(--color-primary);
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.task-card:hover {
+  box-shadow: var(--box-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+}
+
+.task-card h3 {
+  color: var(--color-primary);
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  line-height: 1.3;
+  flex: 1;
+  margin-right: var(--spacing-sm);
+}
+
+.task-status {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  text-align: center;
+  min-width: 100px;
+  white-space: nowrap;
+}
+
+.task-status.sin-asignar {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.task-status.asignada {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+.task-status.finalizada {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.task-card-body {
+  margin-bottom: var(--spacing-md);
+}
+
+.task-detail {
+  margin-bottom: var(--spacing-xs);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.task-detail-label {
+  font-weight: bold;
+  color: var(--color-text);
+  margin-right: var(--spacing-xs);
+  min-width: 80px;
+}
+
+.task-detail-value {
+  color: var(--color-text-light);
+  flex: 1;
+  line-height: 1.4;
+}
+
+.task-card-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  justify-content: flex-end;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid #e9ecef;
+}
+
+.task-card-actions button {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+}
+
+.task-card-actions .btn-danger {
+  background-color: var(--color-danger);
+  color: white;
+}
+
+.task-card-actions .btn-danger:hover {
+  background-color: var(--color-danger-dark);
+}
+
+.task-card-actions .btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.task-card-actions .btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
 /* Elementos editables */
 td[contenteditable="true"],
 .task-item span[contenteditable="true"],
@@ -950,6 +1084,36 @@ body.modo-heroe .confirm-modal p {
 
 /* Tablets - diseño de 2 columnas */
 @media (max-width: 1024px) and (min-width: 769px) {
+  /* ===================================================
+     TARJETAS EN TABLETS - 2 COLUMNAS
+     =================================================== */
+  
+  /* Ocultar tabla y mostrar tarjetas en tablets también */
+  table {
+    display: none !important;
+  }
+  
+  .tasks-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+  }
+  
+  .task-card {
+    padding: var(--spacing-md);
+  }
+  
+  .task-card h3 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .task-card-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  
+  /* Kanban para tablets */
   .kanban-container {
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-md);
@@ -985,6 +1149,24 @@ body.modo-heroe .confirm-modal p {
   header h1,
   .kanban-header h1 {
     font-size: var(--font-size-xl);
+  }
+  
+  /* ===================================================
+     CAMBIO A DISEÑO DE TARJETAS PARA TAREAS
+     =================================================== */
+  
+  /* Ocultar tabla original en dispositivos móviles */
+  table {
+    display: none !important;
+  }
+  
+  /* Mostrar contenedor de tarjetas */
+  .tasks-container {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin: var(--spacing-md) auto;
+    padding: 0 var(--spacing-sm);
   }
   
   /* Kanban responsive - cambio a columna única */
@@ -1064,59 +1246,58 @@ body.modo-heroe .confirm-modal p {
   .landing-buttons {
     gap: var(--spacing-xs);
   }
-  
+
   .landing-buttons a {
     padding: 0.7rem;
     font-size: var(--font-size-sm);
   }
-  
-  /* Tablas responsive - scroll horizontal */
-  table {
-    width: 100%;
-    font-size: var(--font-size-sm);
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  
-  thead, tbody, th, td, tr {
-    display: block;
-  }
-  
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-  
-  tr {
-    border: 1px solid #ccc;
-    margin-bottom: var(--spacing-xs);
-    background: var(--color-white);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-xs);
-  }
-  
-  td {
-    border: none;
-    position: relative;
-    padding: var(--spacing-xs) 0 var(--spacing-xs) 30%;
-    text-align: left;
-    white-space: normal;
-  }
-  
-  td:before {
-    content: attr(data-label) ": ";
-    position: absolute;
-    left: 6px;
-    width: 25%;
-    text-align: left;
-    font-weight: bold;
-    color: var(--color-primary);
-  }
-}
 
-@media (max-width: 480px) {
+  /* ===================================================
+     MEJORAS PARA TARJETAS EN MOBILE
+     =================================================== */
+  
+  .task-card {
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+  
+  .task-card h3 {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .task-card-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-xs);
+  }
+  
+  .task-status {
+    align-self: flex-start;
+    min-width: auto;
+  }
+  
+  .task-detail {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .task-detail-label {
+    min-width: auto;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .task-card-actions {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .task-card-actions button {
+    width: 100%;
+    padding: var(--spacing-sm);
+  }
+}@media (max-width: 480px) {
   /* Móviles pequeños - diseño muy optimizado */
   header h1,
   .kanban-header h1 {
