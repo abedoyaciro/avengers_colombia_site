@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro | Avengers Colombia</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <h1>Registro</h1>
     <nav>
-      <a href="../">Inicio</a>
+      <a href="../index.html">Inicio</a>
     </nav>
   </header>
+
   <main>
     <section class="form-container">
       <h2>Crea tu cuenta</h2>
@@ -61,13 +64,29 @@
     </section>
   </main>
 
-  <script src="app.js"></script>
+  <!-- Script para mostrar/ocultar campos dinámicamente -->
   <script>
-    document.getElementById('rol').addEventListener('change', function () {
-      const rol = this.value;
-      document.getElementById('especializacion-container').style.display = rol === 'heroe' ? 'block' : 'none';
-      document.getElementById('ubicacion-container').style.display = rol === 'usuario' ? 'block' : 'none';
+    const rolSelect = document.getElementById('rol');
+    const ubicacionContainer = document.getElementById('ubicacion-container');
+    const especializacionContainer = document.getElementById('especializacion-container');
+
+    rolSelect.addEventListener('change', () => {
+      const rol = rolSelect.value;
+
+      if (rol === 'usuario') {
+        ubicacionContainer.style.display = 'block';
+        especializacionContainer.style.display = 'none';
+      } else if (rol === 'heroe') {
+        ubicacionContainer.style.display = 'none';
+        especializacionContainer.style.display = 'block';
+      } else {
+        ubicacionContainer.style.display = 'none';
+        especializacionContainer.style.display = 'none';
+      }
     });
   </script>
+
+  <script src="app.js"></script>
 </body>
+
 </html>

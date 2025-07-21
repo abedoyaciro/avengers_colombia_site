@@ -2,31 +2,33 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel Héroe | Avengers Colombia</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tareas Disponibles | Avengers Colombia</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
-  <header>
-    <h1>Panel del Héroe</h1>
-    <nav>
-      <a href="tareas-heroe.html">Tareas Disponibles</a>
-      <a href="tareas-heroe-asignadas.html">Tareas Asignadas</a>
-      <a href="tareas-finalizadas-heroe.html">Tareas Finalizadas</a>
+<body class="modo-heroe">
+  <header class="p-3">
+    <nav class="nav-heroe">
+      <div class="kanban-header">
+        <h1>Tareas Disponibles</h1>
+        <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
+      </div>
+      <div class="hero-nav">
+        <a href="panel-heroe.html">Panel Kanban</a>
+        <a href="tareas-heroe.html" class="active">Disponibles</a>
+        <a href="tareas-heroe-asignadas.html">Asignadas</a>
+        <a href="tareas-finalizadas-heroe.html">Finalizadas</a>
+      </div>
     </nav>
   </header>
 
   <main>
-    <section class="task-list" id="listaTareas">
-      <!-- Aquí se mostrarán las tareas sin asignar -->
+    <section id="listaTareas" class="tabla-container">
+      <!-- Tarjetas de tareas disponibles se generan desde app.js -->
     </section>
   </main>
-
-  <section>
-    <a href="#" class="logout" onclick="cerrarSesion()">Cerrar sesión</a>
-  </section>
 
   <script src="app.js"></script>
 </body>

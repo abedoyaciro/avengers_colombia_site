@@ -26,27 +26,40 @@
 
   <main>
     <section id="detalleTarea" class="form-container">
-      <!-- Aquí se mostrará la información -->
+      <!-- Contenido dinámico -->
     </section>
   </main>
 
+  <script src="app.js"></script>
   <script>
-    const tarea = JSON.parse(localStorage.getItem('tareaSeleccionada'));
-    const contenedor = document.getElementById('detalleTarea');
+    document.addEventListener('DOMContentLoaded', async () => {
+      const id = sessionStorage.getItem('detalle_id');
+      if (!id) {
+        document.getElementById('detalleTarea').innerHTML = '<p>Error: ID de tarea no encontrado.</p>';
+        return;
+      }
 
-    if (tarea) {
-      contenedor.innerHTML = `
-        <h2>${tarea.titulo}</h2>
-        <p><strong>Descripción:</strong> ${tarea.descripcion}</p>
-        <p><strong>Tema:</strong> ${tarea.tema}</p>
-        <p><strong>Fecha de entrega:</strong> ${tarea.fecha}</p>
-        <p><strong>Estado:</strong> ${tarea.estado}</p>
-        <p><strong>Comentario del Héroe:</strong></p>
-        <div class="hero-comment-box">${tarea.comentarioHeroe || 'Sin comentario.'}</div>
-      `;
-    } else {
-      contenedor.innerHTML = `<p>No se encontró la información de la tarea.</p>`;
-    }
+      try {
+        const res = await fetch(`http://localhost:3000/api/tareas/${id}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          document.getElementById('detalleTarea').innerHTML = `<p>Error al obtener la tarea.</p>`;
+          return;
+        }
+
+        document.getElementById('detalleTarea').innerHTML = `
+          <h2>${data.titulo}</h2>
+          <p><strong>Descripción:</strong> ${data.descripcion}</p>
+          <p><strong>Tema:</strong> ${data.tema}</p>
+          <p><strong>Fecha deseada:</strong> ${data.fecha_deseada}</p>
+          ${data.comentario_heroe ? `<div class="hero-comment-box">${data.comentario_heroe}</div>` : ''}
+        `;
+
+      } catch (err) {
+        document.getElementById('detalleTarea').innerHTML = '<p>Error al conectar con el servidor.</p>';
+      }
+    });
   </script>
 </body>
 </html>

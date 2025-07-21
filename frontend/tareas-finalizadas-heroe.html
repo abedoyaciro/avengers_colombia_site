@@ -2,34 +2,35 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tareas Finalizadas | Avengers Colombia</title>
-  <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
-  <header>
-    <h1>Tareas Finalizadas</h1>
-    <nav>
-      <a href="tareas-heroe.html">Tareas Disponibles</a>
-      <a href="tareas-heroe-asignadas.html">Tareas Asignadas</a>
-      <a href="tareas-finalizadas-heroe.html">Tareas Finalizadas</a>
+<body class="modo-heroe">
+  <header class="p-3">
+    <nav class="nav-heroe">
+      <div class="kanban-header">
+        <h1>Tareas Finalizadas</h1>
+        <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
+      </div>
+      <div class="hero-nav">
+        <a href="panel-heroe.html">Panel Kanban</a>
+        <a href="tareas-heroe.html">Disponibles</a>
+        <a href="tareas-heroe-asignadas.html">Asignadas</a>
+        <a href="tareas-finalizadas-heroe.html" class="active">Finalizadas</a>
+      </div>
     </nav>
   </header>
+
   <main>
-    <section id="tareasFinalizadas">
-      <!-- Aquí se mostrará la tabla -->
+    <section id="tareasFinalizadas" class="tabla-container">
+      <!-- Tabla generada dinámicamente desde app.js -->
     </section>
   </main>
 
-  <section>
-    <a href="#" class="logout" onclick="cerrarSesion()">Cerrar sesión</a>
-  </section>
-
   <script src="app.js"></script>
-
 </body>
 
 </html>

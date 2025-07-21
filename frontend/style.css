@@ -1,82 +1,283 @@
-/* === ESTRUCTURA GENERAL === */
+/* ===================================================
+   VARIABLES CSS - SISTEMA DE DISEÑO
+   =================================================== */
+:root {
+  /* Colores principales */
+  --color-primary: #003049;
+  --color-primary-dark: #001d33;
+  --color-secondary: #f77f00;
+  --color-secondary-dark: #d95d00;
+  --color-danger: #d62828;
+  --color-danger-dark: #a61010;
+  --color-success: #28a745;
+  --color-success-dark: #218838;
+  
+  /* Colores modo héroe */
+  --color-hero-bg: #fff3b0;
+  --color-hero-accent: #fcbf49;
+  --color-hero-text: #003049;
+  --color-hero-danger: #8b1538;
+  --color-hero-danger-dark: #6b1028;
+  --color-hero-success: #1e7e34;
+  --color-hero-success-dark: #155724;
+  
+  /* Colores neutros */
+  --color-white: #ffffff;
+  --color-gray-light: #f4f4f4;
+  --color-gray: #6c757d;
+  --color-gray-dark: #495057;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-text-muted: #888888;
+  
+  /* Espaciado */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  
+  /* Tipografía */
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-sm: 0.9rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.1rem;
+  --font-size-xl: 1.3rem;
+  --font-size-xxl: 1.8rem;
+  
+  /* Bordes y sombras */
+  --border-radius: 6px;
+  --border-radius-lg: 10px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --box-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --box-shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.3);
+  
+  /* Transiciones */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ===================================================
+   RESET Y BASE - Más general
+   =================================================== */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f4f4f4;
-  color: #333;
+  font-family: var(--font-family);
+  background: var(--color-gray-light);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-header {
-  background-color: #003049;
-  color: white;
-  padding: 2rem;
-  text-align: center;
+/* ===================================================
+   TIPOGRAFÍA GENERAL
+   =================================================== */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  color: var(--color-primary);
 }
 
-footer {
-  background-color: #003049;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 3rem;
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-base);
 }
 
-/* === MODO HEROE === */
-body.modo-heroe {
-  background-color: #fff3b0;
-  color: #003049;
-}
-
-body.modo-heroe header,
-body.modo-heroe footer,
-nav.nav-heroe {
-  background-color: #fcbf49;
-  color: #003049;
-}
-
-body.modo-heroe .form-container h2,
-body.modo-heroe .form-container a,
-body.modo-heroe .task-item h3,
-nav.nav-heroe a {
-  color: #003049;
-}
-
-body.modo-heroe button,
-body.modo-heroe .form-container button {
-  background-color: #003049;
-  color: #fff3b0;
-}
-
-body.modo-heroe button:hover,
-body.modo-heroe .form-container button:hover {
-  background-color: #001d33;
-}
-
-nav.nav-heroe a:hover {
+a:hover {
   text-decoration: underline;
 }
 
+/* ===================================================
+   LAYOUT GENERAL - Estructura base
+   =================================================== */
+main {
+  flex: 1;
+}
 
-/* === FORMULARIOS === */
+/* Headers - Base común */
+header {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  color: var(--color-white);
+  font-size: var(--font-size-xxl);
+  font-weight: 600;
+}
+
+/* Footers - Base común */
+footer {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+  padding: var(--spacing-md);
+  margin-top: auto;
+}
+
+footer p {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+}
+
+/* Navegación - Base común */
+nav a {
+  color: var(--color-hero-accent);
+  margin: 0 var(--spacing-sm);
+  font-weight: bold;
+}
+
+/* ===================================================
+   SISTEMA DE BOTONES UNIFICADO - Base común
+   =================================================== */
+button,
+.btn,
+.landing-buttons a,
+.kanban-header .logout,
+.btn-finalizar {
+  margin-top: var(--spacing-sm);
+  margin-right: var(--spacing-sm);
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+}
+
+button:hover,
+.btn:hover,
+.landing-buttons a:hover,
+.kanban-header .logout:hover,
+.btn-finalizar:hover {
+  background-color: var(--color-secondary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow-hover);
+  text-decoration: none;
+}
+
+button:active,
+.btn:active,
+.landing-buttons a:active,
+.kanban-header .logout:active,
+.btn-finalizar:active {
+  transform: translateY(0);
+  box-shadow: var(--box-shadow);
+}
+
+/* Variantes de botones - solo colores */
+.btn-danger,
+.kanban-header .logout {
+  background-color: var(--color-danger);
+}
+
+.btn-danger:hover,
+.kanban-header .logout:hover {
+  background-color: var(--color-danger-dark);
+}
+
+.btn-success,
+.btn-finalizar {
+  background-color: var(--color-success);
+}
+
+.btn-success:hover,
+.btn-finalizar:hover {
+  background-color: var(--color-success-dark);
+}
+
+.btn-secondary {
+  background-color: var(--color-gray);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-gray-dark);
+}
+
+.btn-primary {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+/* Botones de landing específicos - solo colores */
+.landing-buttons .btn-login {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.landing-buttons .btn-login:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.landing-buttons .btn-register {
+  background-color: #fdc181;
+  color: var(--color-primary);
+}
+
+.landing-buttons .btn-register:hover {
+  background-color: var(--color-secondary-dark);
+  color: var(--color-white);
+}
+
+/* Botones específicos - ajustes de tamaño */
+.kanban-header .logout {
+  margin: 0;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.btn-finalizar {
+  width: 100%;
+  margin-top: var(--spacing-xs);
+  margin-right: 0;
+}
+
+/* ===================================================
+   SISTEMA DE FORMULARIOS - Base común
+   =================================================== */
 .form-container {
   max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-lg);
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
 }
 
 .form-container h2 {
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: #003049;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
 }
 
 .form-container label {
   display: block;
-  margin: 1rem 0 0.3rem;
+  margin: var(--spacing-sm) 0 0.3rem;
   font-weight: bold;
+  color: var(--color-text);
 }
 
 .form-container input,
@@ -84,545 +285,90 @@ nav.nav-heroe a:hover {
 .form-container select {
   width: 100%;
   padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  transition: border-color var(--transition-base);
 }
 
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px rgba(247, 127, 0, 0.2);
+}
+
+.form-container textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Botones de formulario heredan del sistema base */
 .form-container button {
-  margin-top: 1.5rem;
   width: 100%;
-  padding: 0.7rem;
-  font-size: 1rem;
-  background-color: #f77f00;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.form-container button:hover {
-  background-color: #d95d00;
+  margin-top: var(--spacing-md);
+  margin-right: 0;
 }
 
 .form-container p {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: var(--spacing-sm);
 }
 
 .form-container a {
-  color: #003049;
-  text-decoration: none;
+  color: var(--color-primary);
   font-weight: bold;
 }
 
-/* === TABLAS === */
+/* ===================================================
+   SISTEMA DE TABLAS - Base común
+   =================================================== */
 table {
   width: 90%;
-  margin: 2rem auto;
+  margin: var(--spacing-lg) auto;
   border-collapse: collapse;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 th,
 td {
-  border: 1px solid #ccc;
-  padding: 1rem;
+  border: 1px solid #ddd;
+  padding: var(--spacing-sm);
   text-align: left;
 }
 
 th {
-  background-color: #003049;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: bold;
 }
 
 tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
+tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* Elementos editables */
 td[contenteditable="true"],
 .task-item span[contenteditable="true"],
 .task-item h3[contenteditable="true"] {
   background: #fef3c7;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   padding: 0.2rem 0.4rem;
+  border: 1px dashed var(--color-secondary);
 }
 
-/* === BOTONES === */
-button,
-.actions button {
-  margin-top: 1rem;
-  margin-right: 1rem;
-  padding: 0.6rem 1.2rem;
-  background-color: #f77f00;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover,
-.actions button:hover {
-  background-color: #d95d00;
-}
-
-/* === HOME HERO SECTION === */
-.hero {
-  max-width: 600px;
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  margin: auto;
-}
-
-.hero h2 {
-  color: #003049;
-  margin-bottom: 1rem;
-}
-
-.hero p {
-  font-size: 1.1rem;
-  color: #444;
-  margin-bottom: 2rem;
-}
-
-.hero-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.hero-buttons a {
-  text-decoration: none;
-  padding: 0.8rem;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  text-align: center;
-}
-
-.hero-buttons a.login {
-  background-color: #f77f00;
-  color: brown;
-}
-
-.hero-buttons a.login:hover {
-  background-color: #002437;
-  color: white;
-}
-
-.hero-buttons a.register {
-  background-color: #fdc181;
-  color: brown;
-}
-
-.hero-buttons a.register:hover {
-  background-color: #da7100;
-  color: white;
-}
-
-/* === TAREAS === */
-.task-list {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.task-item {
-  background-color: #fff;
-  border-left: 6px solid #d62828;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s;
-}
-
-.task-item:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-.task-item h3 {
-  margin-top: 0;
-  font-size: 1.3rem;
-  color: #003049;
-}
-
-.task-item p {
-  margin: 0.5rem 0;
-}
-
-/* === COMENTARIOS DE HÉROES === */
-.hero-comment-box {
-  background-color: #fdf1d6;
-  border-left: 4px solid #f77f00;
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 6px;
-  font-style: italic;
-  white-space: pre-wrap;
-  user-select: text;
-}
-
-/* === LOGOUT === */
-.logout {
-  background-color: #d62828;
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-weight: bold;
-  display: block;
-  width: fit-content;
-  margin: 2rem auto;
-  text-align: center;
-  transition: background-color 0.3s;
-}
-
-.logout:hover {
-  background-color: #a61010;
-}
-
-
-/* === NAVEGACIÓN === */
-nav a {
-  color: #fcbf49;
-  margin: 0 1rem;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-/* === PANEL KANBAN === */
-.kanban-col {
-  min-height: 400px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border: 2px solid #fcbf49;
-}
-
-body.modo-heroe .kanban-col {
-  background-color: rgba(255, 243, 176, 0.8);
-  border: 2px solid #003049;
-}
-
-#kanban h4 {
-  color: #003049;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  background-color: rgba(252, 191, 73, 0.3);
-  border-radius: 6px;
-}
-
-body.modo-heroe #kanban h4 {
-  background-color: rgba(0, 48, 73, 0.1);
-  color: #003049;
-}
-
-.kanban-task {
-  background-color: white;
-  border-left: 4px solid #f77f00;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  cursor: default;
-  transition: all 0.3s ease;
-}
-
-.kanban-task:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-body.modo-heroe .kanban-task {
-  background-color: #fff;
-  border-left: 4px solid #003049;
-}
-
-.kanban-task h5 {
-  color: #003049;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.kanban-task p {
-  color: #666;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-
-.kanban-task .task-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  color: #888;
-}
-
-/* Responsive para el header del kanban */
-@media (max-width: 768px) {
-  .nav-heroe .container {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .nav-heroe h1 {
-    text-align: center;
-  }
-  
-  #kanban .col-md-4 {
-    margin-bottom: 2rem;
-  }
-}
-
-/* === ELEMENTOS ESPECÍFICOS DEL KANBAN === */
-.kanban-empty {
-  background-color: rgba(248, 249, 250, 0.8);
-  border: 2px dashed #dee2e6;
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  color: #6c757d;
-  font-style: italic;
-  margin: 1rem 0;
-}
-
-body.modo-heroe .kanban-empty {
-  background-color: rgba(255, 243, 176, 0.5);
-  border-color: #fcbf49;
-  color: #003049;
-}
-
-.kanban-textarea {
-  width: 90%;
-  min-height: 50px;
-  padding: 0.6rem;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  margin: 0.5rem 0;
-  resize: vertical;
-  background-color: #fff;
-}
-
-body.modo-heroe .kanban-textarea {
-  border-color: #fcbf49;
-  background-color: #fff3b0;
-}
-
-.kanban-textarea:focus {
-  outline: none;
-  border-color: #f77f00;
-  box-shadow: 0 0 0 2px rgba(247, 127, 0, 0.2);
-}
-
-body.modo-heroe .kanban-textarea:focus {
-  border-color: #003049;
-  box-shadow: 0 0 0 2px rgba(0, 48, 73, 0.2);
-}
-
-.btn-finalizar {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  margin-top: 0.5rem;
-}
-
-.btn-finalizar:hover {
-  background-color: #218838;
-  transform: translateY(-1px);
-}
-
-body.modo-heroe .btn-finalizar {
-  background-color: #003049;
-  color: #fff3b0;
-}
-
-body.modo-heroe .btn-finalizar:hover {
-  background-color: #001d33;
-}
-
-/* === MEJORAS GENERALES DE CONSISTENCIA === */
-.task-item button,
-.kanban-task button {
-  margin-top: 1rem;
-  margin-right: 0;
-  padding: 0.6rem 1.2rem;
-  background-color: #f77f00;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-}
-
-.task-item button:hover,
-.kanban-task button:hover {
-  background-color: #d95d00;
-  transform: translateY(-1px);
-}
-
-body.modo-heroe .task-item button,
-body.modo-heroe .kanban-task button {
-  background-color: #003049;
-  color: #fff3b0;
-}
-
-body.modo-heroe .task-item button:hover,
-body.modo-heroe .kanban-task button:hover {
-  background-color: #001d33;
-}
-
-/* === CONSISTENCIA EN TEXTAREAS === */
-textarea {
-  width: 90%;
-  min-height: 50px;
-  padding: 0.6rem;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  margin: 0.5rem 0;
-  resize: vertical;
-  background-color: #fff;
-  transition: border-color 0.3s ease;
-}
-
-body.modo-heroe textarea {
-  border-color: #fcbf49;
-  background-color: #fff3b0;
-}
-
-textarea:focus {
-  outline: none;
-  border-color: #f77f00;
-  box-shadow: 0 0 0 2px rgba(247, 127, 0, 0.2);
-}
-
-body.modo-heroe textarea:focus {
-  border-color: #003049;
-  box-shadow: 0 0 0 2px rgba(0, 48, 73, 0.2);
-}
-
-/* === LAYOUT DEL KANBAN SIN BOOTSTRAP === */
-.kanban-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.kanban-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  color: #003049;
-}
-
-.kanban-header .logout {
-  margin: 0;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.kanban-main {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.kanban-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.kanban-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.kanban-column h4 {
-  color: #003049;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  background-color: rgba(252, 191, 73, 0.3);
-  border-radius: 6px;
-  font-size: 1.1rem;
-}
-
-body.modo-heroe .kanban-column h4 {
-  background-color: rgba(0, 48, 73, 0.1);
-  color: #003049;
-}
-
-/* === RESPONSIVE MEJORADO === */
-@media (max-width: 768px) {
-  .kanban-header {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-  
-  .kanban-header h1 {
-    font-size: 1.5rem;
-  }
-  
-  .kanban-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .kanban-col {
-    min-height: 300px;
-  }
-}
-
-@media (max-width: 480px) {
-  .kanban-main {
-    padding: 0 0.5rem;
-  }
-  
-  .kanban-header {
-    padding: 0 0.5rem;
-  }
-  
-  .kanban-header h1 {
-    font-size: 1.3rem;
-  }
-}
-
-/* === SISTEMA DE NOTIFICACIONES PERSONALIZADO === */
+/* ===================================================
+   SISTEMA DE NOTIFICACIONES Y MODALES - Base común
+   =================================================== */
 .notification-overlay {
   position: fixed;
   top: 0;
@@ -636,20 +382,16 @@ body.modo-heroe .kanban-column h4 {
   z-index: 1000;
 }
 
-.notification-modal {
-  background-color: white;
-  border-radius: 10px;
-  padding: 2rem;
+.notification-modal,
+.confirm-modal {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
   max-width: 400px;
   width: 90%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--box-shadow-modal);
   text-align: center;
   animation: modalAppear 0.3s ease-out;
-}
-
-body.modo-heroe .notification-modal {
-  background-color: #fff3b0;
-  border: 2px solid #fcbf49;
 }
 
 @keyframes modalAppear {
@@ -663,79 +405,491 @@ body.modo-heroe .notification-modal {
   }
 }
 
-.notification-modal h3 {
-  color: #003049;
-  margin-bottom: 1rem;
+.notification-modal h3,
+.confirm-modal h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
   font-size: 1.2rem;
 }
 
-.notification-modal p {
-  color: #333;
-  margin-bottom: 1.5rem;
+.notification-modal p,
+.confirm-modal p {
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
   line-height: 1.5;
 }
 
-body.modo-heroe .notification-modal p {
-  color: #003049;
-}
-
-.notification-modal .notification-buttons {
+.notification-buttons {
   display: flex;
-  gap: 1rem;
+  gap: var(--spacing-sm);
   justify-content: center;
 }
 
-.notification-modal button {
+/* Botones de modales heredan del sistema base */
+.notification-modal button,
+.confirm-modal button {
   padding: 0.7rem 1.5rem;
-  border: none;
-  border-radius: 6px;
+}
+
+/* ===================================================
+   COMPONENTES ESPECÍFICOS - Orden de especificidad
+   =================================================== */
+
+/* Landing Page */
+.landing {
+  max-width: 600px;
+  background: var(--color-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  margin: var(--spacing-lg) auto;
+}
+
+.landing h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.landing p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Contenedor específico para botones de landing */
+.landing-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* Sistema de Tareas */
+.task-list {
+  max-width: 900px;
+  margin: var(--spacing-lg) auto;
+  padding: 0 var(--spacing-sm);
+}
+
+.task-item {
+  background-color: var(--color-white);
+  border-left: 6px solid var(--color-danger);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: all var(--transition-base);
+}
+
+.task-item:hover {
+  box-shadow: var(--box-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.task-item h3 {
+  margin-top: 0;
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+}
+
+.task-item p {
+  margin: 0.5rem 0;
+  color: var(--color-text-light);
+}
+
+.task-item button {
+  width: 100%;
+  margin-top: var(--spacing-sm);
+  margin-right: 0;
+}
+
+.hero-comment-box {
+  background-color: #fdf1d6;
+  border-left: 4px solid var(--color-secondary);
+  padding: var(--spacing-sm);
+  margin: var(--spacing-sm) 0;
+  border-radius: var(--border-radius);
+  font-style: italic;
+  white-space: pre-wrap;
+  user-select: text;
+}
+
+/* Sistema Kanban */
+.kanban-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  background-color: transparent;
+  color: inherit;
+}
+
+.kanban-header h1 {
+  margin: 0;
+  font-size: var(--font-size-xxl);
+  color: inherit;
+  font-weight: 600;
+}
+
+
+
+.kanban-main {
+  max-width: 1200px;
+  margin: var(--spacing-lg) auto;
+  padding: 0 var(--spacing-sm);
+}
+
+.kanban-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.kanban-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-column h4 {
+  color: var(--color-primary);
   font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-xs);
+  background-color: rgba(252, 191, 73, 0.3);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-lg);
 }
 
-.notification-modal .btn-primary {
-  background-color: #f77f00;
-  color: white;
+.kanban-col {
+  min-height: 400px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--color-hero-accent);
 }
 
-.notification-modal .btn-primary:hover {
-  background-color: #d95d00;
+.kanban-task {
+  background-color: var(--color-white);
+  border-left: 4px solid var(--color-secondary);
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  cursor: default;
+  transition: all var(--transition-base);
 }
 
-body.modo-heroe .notification-modal .btn-primary {
-  background-color: #003049;
-  color: #fff3b0;
+.kanban-task:hover {
+  box-shadow: var(--box-shadow-hover);
+  transform: translateY(-2px);
 }
 
-body.modo-heroe .notification-modal .btn-primary:hover {
-  background-color: #001d33;
+.kanban-task h5 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xs);
+  font-weight: bold;
 }
 
-.notification-modal .btn-secondary {
-  background-color: #6c757d;
-  color: white;
+.kanban-task p {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-sm);
 }
 
-.notification-modal .btn-secondary:hover {
-  background-color: #545b62;
+.kanban-task .task-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-xs);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
 }
 
-/* === MEJORAS EN CONFIRMACIONES === */
-.confirm-modal {
-  background-color: #fff;
-  border-left: 4px solid #d62828;
+.kanban-empty {
+  background-color: rgba(248, 249, 250, 0.8);
+  border: 2px dashed #dee2e6;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: var(--spacing-sm) 0;
 }
 
+.kanban-textarea {
+  width: 90%;
+  min-height: 50px;
+  padding: 0.6rem;
+  border: 2px solid #ccc;
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  margin: var(--spacing-xs) 0;
+  resize: vertical;
+  background-color: var(--color-white);
+  transition: border-color var(--transition-base);
+}
+
+.kanban-textarea:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px rgba(247, 127, 0, 0.2);
+}
+
+
+
+/* ===================================================
+   MODO HÉROE - Sobrescribir colores manteniendo estructura
+   =================================================== */
+body.modo-heroe {
+  background-color: var(--color-hero-bg);
+  color: var(--color-hero-text);
+}
+
+/* Headers y footers en modo héroe - solo colores */
+body.modo-heroe header,
+body.modo-heroe footer {
+  background-color: var(--color-hero-accent);
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe header h1,
+body.modo-heroe footer p {
+  color: var(--color-hero-text);
+}
+
+/* Kanban en modo héroe - solo colores */
+body.modo-heroe .kanban-header {
+  background-color: var(--color-hero-accent);
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe .kanban-header h1 {
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe .kanban-column h4 {
+  background-color: rgba(0, 48, 73, 0.1);
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe .kanban-col {
+  background-color: rgba(255, 243, 176, 0.8);
+  border: 2px solid var(--color-primary);
+}
+
+body.modo-heroe .kanban-task {
+  background-color: var(--color-white);
+  border-left: 4px solid var(--color-primary);
+}
+
+body.modo-heroe .kanban-empty {
+  background-color: rgba(255, 243, 176, 0.5);
+  border-color: var(--color-hero-accent);
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe .kanban-textarea {
+  border-color: var(--color-hero-accent);
+  background-color: var(--color-hero-bg);
+}
+
+body.modo-heroe .kanban-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 48, 73, 0.2);
+}
+
+/* Botones en modo héroe - solo colores */
+body.modo-heroe button,
+body.modo-heroe .btn,
+body.modo-heroe .landing-buttons a {
+  background-color: var(--color-primary);
+  color: var(--color-hero-bg);
+}
+
+body.modo-heroe button:hover,
+body.modo-heroe .btn:hover,
+body.modo-heroe .landing-buttons a:hover {
+  background-color: var(--color-primary-dark);
+}
+
+body.modo-heroe .btn-danger,
+body.modo-heroe .kanban-header .logout {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+
+body.modo-heroe .btn-danger:hover,
+body.modo-heroe .kanban-header .logout:hover {
+  background-color: var(--color-danger-dark);
+}
+
+body.modo-heroe .btn-success,
+body.modo-heroe .btn-finalizar {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+body.modo-heroe .btn-success:hover,
+body.modo-heroe .btn-finalizar:hover {
+  background-color: var(--color-success-dark);
+}
+
+body.modo-heroe .btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-hero-bg);
+}
+
+body.modo-heroe .btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Modales en modo héroe - solo colores */
+body.modo-heroe .notification-modal,
 body.modo-heroe .confirm-modal {
-  background-color: #fff3b0;
-  border-left: 4px solid #fcbf49;
+  background-color: var(--color-hero-bg);
+  border: 2px solid var(--color-hero-accent);
 }
 
-.confirm-modal h3 {
-  color: #d62828;
+body.modo-heroe .notification-modal p,
+body.modo-heroe .confirm-modal p {
+  color: var(--color-hero-text);
 }
 
-body.modo-heroe .confirm-modal h3 {
-  color: #003049;
+/* ===================================================
+   RESPONSIVE DESIGN - De general a específico
+   =================================================== */
+@media (max-width: 768px) {
+  /* Layout general responsive */
+  header {
+    padding: var(--spacing-sm);
+  }
+  
+  header h1,
+  .kanban-header h1 {
+    font-size: var(--font-size-lg);
+  }
+  
+  /* Kanban responsive */
+  .kanban-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    text-align: center;
+    padding: 0;
+  }
+  
+  .kanban-container {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-sm);
+    overflow-x: auto;
+  }
+  
+  .kanban-col {
+    min-height: 300px;
+    min-width: 200px;
+  }
+  
+  /* Formularios responsive */
+  .form-container,
+  .landing-hero {
+    margin: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+  
+  /* Navegación responsive */
+  nav a {
+    display: block;
+    margin: var(--spacing-xs) 0;
+  }
+  
+  /* Botones responsive */
+  .landing-buttons {
+    gap: var(--spacing-xs);
+  }
+  
+  .landing-buttons a {
+    padding: 0.7rem;
+    font-size: var(--font-size-sm);
+  }
 }
+
+@media (max-width: 480px) {
+  /* Móviles - más específico */
+  header h1,
+  .kanban-header h1 {
+    font-size: var(--font-size-base);
+  }
+  
+  .kanban-main,
+  .form-container,
+  .landing-hero {
+    padding: var(--spacing-sm);
+    margin: var(--spacing-xs);
+  }
+  
+  .kanban-header {
+    padding: 0;
+  }
+  
+  /* Tablas responsive */
+  table {
+    width: 95%;
+    font-size: var(--font-size-sm);
+  }
+  
+  th, td {
+    padding: var(--spacing-xs);
+  }
+  
+  /* Tareas responsive */
+  .task-list {
+    padding: 0 var(--spacing-xs);
+  }
+  
+  .task-item {
+    padding: var(--spacing-sm);
+  }
+  
+  /* Modales responsive */
+  .notification-modal,
+  .confirm-modal {
+    margin: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+}
+
+/* ===================================================
+   UTILIDADES - Lo más específico
+   =================================================== */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+
+.w-100 { width: 100%; }
+
+.d-flex { display: flex; }
+.justify-center { justify-content: center; }
+.align-center { align-items: center; }
+.gap-1 { gap: var(--spacing-xs); }
+.gap-2 { gap: var(--spacing-sm); }
+.gap-3 { gap: var(--spacing-md); }
+
+/* ===================================================
+   FIN DEL ARCHIVO CSS OPTIMIZADO
+   =================================================== */
