@@ -2,10 +2,6 @@
 CREATE DATABASE IF NOT EXISTS avengers_colombia;
 USE avengers_colombia;
 
-DROP DATABASE IF EXISTS avengers_colombia;
-CREATE DATABASE avengers_colombia;
-USE avengers_colombia;
-
 -- Tabla: usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
   id_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,19 +38,19 @@ CREATE TABLE IF NOT EXISTS tareas (
 );
 
 -- insert usuarios
-INSERT INTO usuarios (nombre, correo, contrasenha, ubicacion) VALUES
+INSERT IGNORE INTO usuarios (nombre, correo, contrasenha, ubicacion) VALUES
 ('Andrea Torres', 'andrea@correo.com', '123abc!', 'Cali'),
 ('Luis Ramírez', 'luis@correo.com', '456def!', 'Medellín'),
 ('Camila Díaz', 'camila@correo.com', '789ghi!', 'Bogotá');
 
 -- heroes
-INSERT INTO heroes (nombre, correo, contrasenha, especializacion) VALUES
+INSERT IGNORE INTO heroes (nombre, correo, contrasenha, especializacion) VALUES
 ('Carlos Bravo', 'carlos@heroes.com', 'abc123!', 'Matemáticas'),
 ('Daniela Pérez', 'daniela@heroes.com', 'def456!', 'Programación'),
 ('Juan Nieto', 'juan@heroes.com', 'ghi789!', 'Inglés');
 
 -- tareas
-INSERT INTO tareas (titulo, descripcion, tema, fecha_deseada, estado, id_usuario) VALUES
+INSERT IGNORE INTO tareas (titulo, descripcion, tema, fecha_deseada, estado, id_usuario) VALUES
 ('Resolver ecuaciones', 'Necesito ayuda con ecuaciones de segundo grado.', 'Matemáticas', '2025-07-25', 'Sin Asignar', 1),
 ('Ensayo de inglés', 'Revisar mi ensayo sobre tecnología.', 'Inglés', '2025-07-22', 'Asignada', 2),
 ('Proyecto HTML', 'Ayuda con estructura básica de HTML.', 'Programación', '2025-07-23', 'Finalizada', 3);
