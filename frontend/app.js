@@ -477,7 +477,7 @@ async function mostrarAsignadas() {
         <p><strong>Descripción:</strong> ${tarea.descripcion}</p>
         <p><strong>Tema:</strong> ${tarea.tema}</p>
         <p><strong>Fecha:</strong> ${tarea.fecha_deseada}</p>
-        <textarea id="comentario-${i}" placeholder="Comentario del héroe..."></textarea>
+        <textarea id="comentario-${i}" class="kanban-textarea" placeholder="Comentario del héroe..."></textarea>
         <button onclick="marcarFinalizada(${tarea.id_tarea}, ${i})">Marcar como Finalizada</button>
       </div>
     `).join('');
@@ -619,11 +619,23 @@ function renderizarColumnaKanban(idColumna, tareas, tipo) {
   const columna = document.getElementById(idColumna);
   if (!columna) return;
 
+  if (tareas.length === 0) {
+    columna.innerHTML = '<div class="kanban-empty">No hay tareas en esta categoría</div>';
+    return;
+  }
+
+  // Mapear tipos a clases CSS
+  const claseEstado = {
+    'Sin Asignar': 'sin-asignar',
+    'Asignada': 'asignada', 
+    'Finalizada': 'finalizada'
+  }[tipo] || '';
+
   columna.innerHTML = tareas.map((tarea, i) => {
     const base = `
-      <div class="kanban-tarea">
+      <div class="kanban-task ${claseEstado}">
         <h4>${tarea.titulo}</h4>
-        <p>${tarea.descripcion}</p>
+        <p><strong>Descripción:</strong> ${tarea.descripcion}</p>
         <p><strong>Tema:</strong> ${tarea.tema}</p>
         <p><strong>Fecha:</strong> ${tarea.fecha_deseada}</p>`;
 
@@ -633,7 +645,7 @@ function renderizarColumnaKanban(idColumna, tareas, tipo) {
 
     if (tipo === 'Asignada') {
       return base + `
-        <textarea id="comentario-${i}" placeholder="Comentario del héroe..."></textarea>
+        <textarea id="comentario-${i}" class="kanban-textarea" placeholder="Comentario del héroe..."></textarea>
         <button onclick="finalizarTareaKanban('${tarea.titulo}', ${i})">Finalizar</button>
       </div>`;
     }
@@ -653,11 +665,17 @@ async function asignarTareaKanban(titulo) {
     return;
   }
 
+  // Agregar animación de movimiento
+  const tarjeta = event.target.closest('.kanban-task');
+  if (tarjeta) {
+    tarjeta.classList.add('moving');
+  }
+
   try {
     const res = await fetch(`${API_BASE}/tareas/asignar`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ titulo, id_heroe: sesion.idHeroe})
+      body: JSON.stringify({ titulo, id_heroe: sesion.idHeroe })
     });
 
     const data = await res.json();
@@ -667,11 +685,22 @@ async function asignarTareaKanban(titulo) {
     }
 
     mostrarExito('Tarea asignada exitosamente.');
-    mostrarPanelKanban();
+    
+    // Esperar un poco antes de actualizar para que se vea la animación
+    setTimeout(() => {
+      mostrarPanelKanban();
+    }, 300);
 
   } catch (err) {
     console.error(err);
     mostrarError('Error al conectar con el servidor.');
+  } finally {
+    // Remover animación después de un tiempo
+    if (tarjeta) {
+      setTimeout(() => {
+        tarjeta.classList.remove('moving');
+      }, 500);
+    }
   }
 }
 
@@ -689,11 +718,17 @@ async function finalizarTareaKanban(titulo, i) {
     return;
   }
 
+  // Agregar animación de movimiento
+  const tarjeta = event.target.closest('.kanban-task');
+  if (tarjeta) {
+    tarjeta.classList.add('moving');
+  }
+
   try {
     const res = await fetch(`${API_BASE}/tareas/finalizar`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ titulo, comentario, id_heroe: sesion.idHeroe})
+      body: JSON.stringify({ titulo, comentario, id_heroe: sesion.idHeroe })
     });
 
     const data = await res.json();
@@ -703,11 +738,22 @@ async function finalizarTareaKanban(titulo, i) {
     }
 
     mostrarExito('Tarea finalizada correctamente.');
-    mostrarPanelKanban();
+    
+    // Esperar un poco antes de actualizar para que se vea la animación
+    setTimeout(() => {
+      mostrarPanelKanban();
+    }, 300);
 
   } catch (err) {
     console.error(err);
     mostrarError('Error al conectar con el servidor.');
+  } finally {
+    // Remover animación después de un tiempo
+    if (tarjeta) {
+      setTimeout(() => {
+        tarjeta.classList.remove('moving');
+      }, 500);
+    }
   }
 }
 
