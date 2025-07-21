@@ -116,6 +116,34 @@ header h1 {
   font-weight: 600;
 }
 
+/* Sistema de navegación con header y logout separados */
+.header-with-logout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.header-with-logout h1 {
+  text-align: left;
+  margin: 0;
+  flex: 1;
+}
+
+.header-with-logout .logout {
+  font-size: var(--font-size-sm);
+  padding: 0.5rem 1rem;
+  margin: 0;
+}
+
+/* Navegación centrada */
+.nav-centered {
+  text-align: center;
+  margin-top: var(--spacing-sm);
+}
+
 /* Footers - Base común */
 footer {
   background-color: var(--color-primary);
@@ -145,6 +173,7 @@ button,
 .btn,
 .landing-buttons a,
 .kanban-header .logout,
+.header-with-logout .logout,
 .btn-finalizar {
   margin-top: var(--spacing-sm);
   margin-right: var(--spacing-sm);
@@ -168,6 +197,7 @@ button:hover,
 .btn:hover,
 .landing-buttons a:hover,
 .kanban-header .logout:hover,
+.header-with-logout .logout:hover,
 .btn-finalizar:hover {
   background-color: var(--color-secondary-dark);
   transform: translateY(-2px);
@@ -179,6 +209,7 @@ button:active,
 .btn:active,
 .landing-buttons a:active,
 .kanban-header .logout:active,
+.header-with-logout .logout:active,
 .btn-finalizar:active {
   transform: translateY(0);
   box-shadow: var(--box-shadow);
@@ -186,12 +217,14 @@ button:active,
 
 /* Variantes de botones - solo colores */
 .btn-danger,
-.kanban-header .logout {
+.kanban-header .logout,
+.header-with-logout .logout {
   background-color: var(--color-danger);
 }
 
 .btn-danger:hover,
-.kanban-header .logout:hover {
+.kanban-header .logout:hover,
+.header-with-logout .logout:hover {
   background-color: var(--color-danger-dark);
 }
 
@@ -720,13 +753,15 @@ body.modo-heroe .landing-buttons a:hover {
 }
 
 body.modo-heroe .btn-danger,
-body.modo-heroe .kanban-header .logout {
+body.modo-heroe .kanban-header .logout,
+body.modo-heroe .header-with-logout .logout {
   background-color: var(--color-danger);
   color: var(--color-white);
 }
 
 body.modo-heroe .btn-danger:hover,
-body.modo-heroe .kanban-header .logout:hover {
+body.modo-heroe .kanban-header .logout:hover,
+body.modo-heroe .header-with-logout .logout:hover {
   background-color: var(--color-danger-dark);
 }
 

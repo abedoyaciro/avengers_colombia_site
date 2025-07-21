@@ -10,8 +10,11 @@
 
 <body>
   <header>
-    <h1>Publicar Tarea</h1>
-    <nav>
+    <div class="header-with-logout">
+      <h1>Publicar Tarea</h1>
+      <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+    <nav class="nav-centered">
       <a href="mis-tareas.html">Mis Tareas</a>
       <a href="publicar-tarea.html">Publicar Tarea</a>
     </nav>
@@ -52,9 +55,6 @@
 
   <footer>
     <p>&copy; 2025 Avengers Colombia - Conectando héroes con ciudadanos</p>
-    <div class="text-center mt-2">
-      <a href="#" class="btn btn-danger" onclick="cerrarSesion()">Cerrar sesión</a>
-    </div>
   </footer>
 
   <script src="app.js"></script>
