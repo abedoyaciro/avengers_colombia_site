@@ -1,6 +1,52 @@
 console.log("Avengers Colombia - Sistema conectado al backend");
 const API_BASE = 'http://localhost:3000/api';
 
+// ------------------------
+// UTILIDADES PARA FECHAS
+// ------------------------
+function formatearFecha(fecha) {
+  if (!fecha) return 'No especificada';
+  
+  try {
+    // Si ya está en formato correcto (YYYY-MM-DD), devolverla tal como está
+    if (typeof fecha === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(fecha)) {
+      return fecha;
+    }
+    
+    // Si viene en formato ISO, convertirla
+    const fechaObj = new Date(fecha);
+    if (isNaN(fechaObj.getTime())) return fecha; // Si no es válida, devolver original
+    
+    // Formatear como YYYY-MM-DD
+    return fechaObj.toISOString().split('T')[0];
+  } catch (error) {
+    console.warn('Error al formatear fecha:', fecha, error);
+    return fecha;
+  }
+}
+
+// Función para formatear fechas en español (más legible)
+function formatearFechaEspanol(fecha) {
+  if (!fecha) return 'No especificada';
+  
+  try {
+    const fechaFormateada = formatearFecha(fecha);
+    if (fechaFormateada === 'No especificada') return fechaFormateada;
+    
+    const fechaObj = new Date(fechaFormateada + 'T00:00:00');
+    if (isNaN(fechaObj.getTime())) return fechaFormateada;
+    
+    return fechaObj.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  } catch (error) {
+    console.warn('Error al formatear fecha en español:', fecha, error);
+    return formatearFecha(fecha);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const sesion = obtenerSesion();
   if (sesion && sesion.rol === 'heroe') {
@@ -352,7 +398,7 @@ function generarTablaTareas(tareas) {
         <td>${tarea.titulo}</td>
         <td>${tarea.descripcion}</td>
         <td>${tarea.tema}</td>
-        <td>${tarea.fecha_deseada}</td>
+        <td>${formatearFechaEspanol(tarea.fecha_deseada)}</td>
         <td>${tarea.estado}</td>
         <td>
           ${tarea.estado === 'Sin Asignar' 
@@ -423,7 +469,7 @@ async function mostrarTareasDisponibles() {
         <h3>${tarea.titulo}</h3>
         <p><strong>Descripción:</strong> ${tarea.descripcion}</p>
         <p><strong>Tema:</strong> ${tarea.tema}</p>
-        <p><strong>Fecha:</strong> ${tarea.fecha_deseada}</p>
+        <p><strong>Fecha:</strong> ${formatearFechaEspanol(tarea.fecha_deseada)}</p>
         <button onclick="aceptarTarea(${tarea.id_tarea}, this)">Aceptar tarea</button>
       </div>
     `).join('');
@@ -500,7 +546,7 @@ async function mostrarAsignadas() {
         <h3>${tarea.titulo}</h3>
         <p><strong>Descripción:</strong> ${tarea.descripcion}</p>
         <p><strong>Tema:</strong> ${tarea.tema}</p>
-        <p><strong>Fecha:</strong> ${tarea.fecha_deseada}</p>
+        <p><strong>Fecha:</strong> ${formatearFechaEspanol(tarea.fecha_deseada)}</p>
         <textarea id="comentario-${i}" class="kanban-textarea" placeholder="Comentario del héroe..."></textarea>
         <button onclick="marcarFinalizada(${tarea.id_tarea}, ${i})">Marcar como Finalizada</button>
       </div>
@@ -661,7 +707,7 @@ function renderizarColumnaKanban(idColumna, tareas, tipo) {
         <h4>${tarea.titulo}</h4>
         <p><strong>Descripción:</strong> ${tarea.descripcion}</p>
         <p><strong>Tema:</strong> ${tarea.tema}</p>
-        <p><strong>Fecha:</strong> ${tarea.fecha_deseada}</p>`;
+        <p><strong>Fecha:</strong> ${formatearFechaEspanol(tarea.fecha_deseada)}</p>`;
 
     if (tipo === 'Sin Asignar') {
       return base + `<button onclick="asignarTareaKanban('${tarea.titulo}')">Asignar</button></div>`;

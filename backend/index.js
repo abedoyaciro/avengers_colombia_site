@@ -14,6 +14,38 @@ const mysql = require('mysql2/promise');
 
 const app = express();
 
+// Función utilitaria para formatear fechas
+function formatearFecha(fecha) {
+  if (!fecha) return null;
+  
+  const fechaObj = new Date(fecha);
+  if (isNaN(fechaObj.getTime())) return fecha; // Si no es una fecha válida, devolver original
+  
+  // Formatear como YYYY-MM-DD
+  return fechaObj.toISOString().split('T')[0];
+}
+
+// Función para formatear todas las fechas en un objeto/array de tareas
+function formatearFechasTareas(tareas) {
+  if (!tareas) return tareas;
+  
+  if (Array.isArray(tareas)) {
+    return tareas.map(tarea => ({
+      ...tarea,
+      fecha_deseada: formatearFecha(tarea.fecha_deseada),
+      fecha_creacion: formatearFecha(tarea.fecha_creacion),
+      fecha_finalizacion: formatearFecha(tarea.fecha_finalizacion)
+    }));
+  } else {
+    return {
+      ...tareas,
+      fecha_deseada: formatearFecha(tareas.fecha_deseada),
+      fecha_creacion: formatearFecha(tareas.fecha_creacion),
+      fecha_finalizacion: formatearFecha(tareas.fecha_finalizacion)
+    };
+  }
+}
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -195,7 +227,7 @@ app.get('/api/tareas', async (req, res) => {
   try {
     conn = await pool.getConnection();
     const [tareas] = await conn.query('SELECT * FROM tareas');
-    res.json(tareas);
+    res.json(formatearFechasTareas(tareas));
   } catch (err) {
     console.error('❌ Error al obtener tareas:', err);
     res.status(500).json({ error: 'Error en la base de datos' });
@@ -246,7 +278,7 @@ app.get('/api/usuarios/:id_usuario/tareas', async (req, res) => {
       `SELECT * FROM tareas WHERE id_usuario = ?`,
       [id_usuario]
     );
-    res.json(tareas);
+    res.json(formatearFechasTareas(tareas));
   } catch (err) {
     console.error('❌ Error al obtener tareas del usuario:', err);
     res.status(500).json({ error: 'Error en la base de datos' });
@@ -280,9 +312,9 @@ app.get('/api/tareas/kanban', async (req, res) => {
     );
 
     res.json({
-      sinAsignar,
-      asignadas,
-      finalizadas
+      sinAsignar: formatearFechasTareas(sinAsignar),
+      asignadas: formatearFechasTareas(asignadas),
+      finalizadas: formatearFechasTareas(finalizadas)
     });
   } catch (err) {
     console.error('❌ Error al obtener tareas del Kanban:', err);
@@ -384,7 +416,7 @@ app.get('/api/tareas/:id_tarea', async (req, res) => {
     if (tareas.length === 0) {
       res.status(404).json({ error: 'Tarea no encontrada' });
     } else {
-      res.json(tareas[0]);
+      res.json(formatearFechasTareas(tareas[0]));
     }
   } catch (err) {
     console.error('❌ Error al obtener tarea:', err);
@@ -405,7 +437,7 @@ app.get('/api/heroes/:id_heroe/tareas', async (req, res) => {
       `SELECT * FROM tareas WHERE id_heroe = ? AND estado = 'Asignada'`,
       [id_heroe]
     );
-    res.json(tareas);
+    res.json(formatearFechasTareas(tareas));
   } catch (err) {
     console.error('❌ Error al obtener tareas del héroe:', err);
     res.status(500).json({ error: 'Error en la base de datos' });
@@ -425,7 +457,7 @@ app.get('/api/heroes/:id_heroe/tareas/finalizadas', async (req, res) => {
       `SELECT * FROM tareas WHERE id_heroe = ? AND estado = 'Finalizada'`,
       [id_heroe]
     );
-    res.json(tareas);
+    res.json(formatearFechasTareas(tareas));
   } catch (err) {
     console.error('❌ Error al obtener tareas finalizadas del héroe:', err);
     res.status(500).json({ error: 'Error en la base de datos' });
