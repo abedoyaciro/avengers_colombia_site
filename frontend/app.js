@@ -6,8 +6,32 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sesion && sesion.rol === 'heroe') {
     window.correoHeroe = sesion.correo;
     window.idHeroe = sesion.idHeroe;
+    
+    // Personalizar título del héroe
+    personalizarTituloHeroe(sesion);
   }
 });
+
+// ------------------------
+// PERSONALIZACIÓN DE TÍTULO
+// ------------------------
+function personalizarTituloHeroe(sesion) {
+  const tituloElement = document.getElementById('titulo-heroe');
+  if (!tituloElement) return;
+  
+  if (sesion && sesion.nombre) {
+    // Obtener solo el primer nombre para que se vea más limpio
+    const primerNombre = sesion.nombre.split(' ')[0];
+    tituloElement.innerHTML = `¡Hola <span style="color: var(--color-secondary); font-weight: bold;">${primerNombre}</span>! - Panel de Héroe`;
+    
+    // También actualizar el título de la página
+    document.title = `Panel de ${primerNombre} | Avengers Colombia`;
+  } else {
+    // Fallback si no hay nombre
+    tituloElement.textContent = 'Panel del Héroe - Kanban';
+    document.title = 'Panel del Héroe | Avengers Colombia';
+  }
+}
 
 
 // ------------------------
@@ -768,6 +792,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (path.includes('panel-heroe.html')) {
+    // Personalizar título del héroe
+    const sesion = obtenerSesion();
+    if (sesion && sesion.rol === 'heroe') {
+      personalizarTituloHeroe(sesion);
+    }
+    
     mostrarTareasDisponibles();
     mostrarAsignadas();
     mostrarFinalizadas();

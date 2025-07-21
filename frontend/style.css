@@ -566,11 +566,22 @@ td[contenteditable="true"],
   font-weight: 600;
 }
 
+/* Estilos para el nombre personalizado del héroe */
+.kanban-header h1 span {
+  display: inline;
+  transition: var(--transition-base);
+}
+
+body.modo-heroe .kanban-header h1 span {
+  color: var(--color-primary) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
 
 
 .kanban-main {
   max-width: 1200px;
-  margin: var(--spacing-lg) auto;
+  margin: var(--spacing-sm) auto;
   padding: 0 var(--spacing-sm);
 }
 
@@ -578,7 +589,7 @@ td[contenteditable="true"],
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-sm);
 }
 
 .kanban-column {
@@ -936,6 +947,35 @@ body.modo-heroe .confirm-modal p {
 /* ===================================================
    RESPONSIVE DESIGN - De general a específico
    =================================================== */
+
+/* Tablets - diseño de 2 columnas */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .kanban-container {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  /* Reorganizar columnas para tablets */
+  .kanban-column:has(#columna-sin-asignar) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .kanban-column:has(#columna-asignadas) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  .kanban-column:has(#columna-finalizadas) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  
+  .kanban-col {
+    min-height: 350px;
+  }
+}
+
 @media (max-width: 768px) {
   /* Layout general responsive */
   header {
@@ -944,31 +984,72 @@ body.modo-heroe .confirm-modal p {
   
   header h1,
   .kanban-header h1 {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
   }
   
-  /* Kanban responsive */
+  /* Kanban responsive - cambio a columna única */
   .kanban-header {
     flex-direction: column;
     gap: var(--spacing-sm);
     text-align: center;
-    padding: 0;
+    padding: var(--spacing-sm);
+  }
+  
+  .kanban-main {
+    padding: 0 var(--spacing-xs);
   }
   
   .kanban-container {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: var(--spacing-sm);
-    overflow-x: auto;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+  }
+  
+  .kanban-column {
+    order: 1;
+  }
+  
+  /* Reordenar columnas para mejor flujo móvil */
+  .kanban-column:has(#columna-sin-asignar) {
+    order: 1;
+  }
+  
+  .kanban-column:has(#columna-asignadas) {
+    order: 2;
+  }
+  
+  .kanban-column:has(#columna-finalizadas) {
+    order: 3;
   }
   
   .kanban-col {
-    min-height: 300px;
-    min-width: 200px;
+    min-height: 200px;
+    padding: var(--spacing-sm);
+  }
+  
+  .kanban-column h4 {
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  /* Tarjetas más compactas en móvil */
+  .kanban-task {
+    padding: var(--spacing-sm);
+  }
+  
+  .kanban-task h4 {
+    font-size: var(--font-size-base);
+  }
+  
+  .kanban-task p {
+    font-size: 0.85rem;
+    margin: 0.3rem 0;
   }
   
   /* Formularios responsive */
   .form-container,
-  .landing-hero {
+  .landing {
     margin: var(--spacing-sm);
     padding: var(--spacing-md);
   }
@@ -988,34 +1069,150 @@ body.modo-heroe .confirm-modal p {
     padding: 0.7rem;
     font-size: var(--font-size-sm);
   }
+  
+  /* Tablas responsive - scroll horizontal */
+  table {
+    width: 100%;
+    font-size: var(--font-size-sm);
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  tr {
+    border: 1px solid #ccc;
+    margin-bottom: var(--spacing-xs);
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xs);
+  }
+  
+  td {
+    border: none;
+    position: relative;
+    padding: var(--spacing-xs) 0 var(--spacing-xs) 30%;
+    text-align: left;
+    white-space: normal;
+  }
+  
+  td:before {
+    content: attr(data-label) ": ";
+    position: absolute;
+    left: 6px;
+    width: 25%;
+    text-align: left;
+    font-weight: bold;
+    color: var(--color-primary);
+  }
 }
 
 @media (max-width: 480px) {
-  /* Móviles - más específico */
+  /* Móviles pequeños - diseño muy optimizado */
   header h1,
   .kanban-header h1 {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
   }
   
-  .kanban-main,
+  .kanban-main {
+    padding: 0 var(--spacing-xs);
+    margin: var(--spacing-xs) auto;
+  }
+  
+  .kanban-container {
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xs);
+  }
+  
+  .kanban-header {
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .kanban-header .logout {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .kanban-column h4 {
+    font-size: var(--font-size-base);
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .kanban-col {
+    min-height: 150px;
+    padding: var(--spacing-xs);
+  }
+  
+  /* Tarjetas ultra-compactas */
+  .kanban-task {
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .kanban-task h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .kanban-task p {
+    font-size: 0.8rem;
+    margin: 0.2rem 0;
+    line-height: 1.3;
+  }
+  
+  .kanban-task button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    margin-top: var(--spacing-xs);
+  }
+  
+  .kanban-textarea {
+    min-height: 40px;
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+  
+  /* Formularios más compactos */
   .form-container,
-  .landing-hero {
+  .landing {
     padding: var(--spacing-sm);
     margin: var(--spacing-xs);
   }
   
-  .kanban-header {
-    padding: 0;
+  .form-container h2 {
+    font-size: var(--font-size-lg);
   }
   
-  /* Tablas responsive */
-  table {
-    width: 95%;
+  .form-container input,
+  .form-container textarea,
+  .form-container select {
+    padding: 0.5rem;
     font-size: var(--font-size-sm);
   }
   
-  th, td {
-    padding: var(--spacing-xs);
+  /* Tablas más simples en móvil muy pequeño */
+  table {
+    font-size: 0.8rem;
+  }
+  
+  td {
+    padding: 0.3rem 0 0.3rem 35%;
+  }
+  
+  td:before {
+    width: 30%;
+    font-size: 0.75rem;
   }
   
   /* Tareas responsive */
@@ -1027,11 +1224,31 @@ body.modo-heroe .confirm-modal p {
     padding: var(--spacing-sm);
   }
   
+  .task-item h3 {
+    font-size: var(--font-size-lg);
+  }
+  
   /* Modales responsive */
   .notification-modal,
   .confirm-modal {
-    margin: var(--spacing-sm);
-    padding: var(--spacing-md);
+    margin: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    max-width: 95%;
+  }
+  
+  .notification-modal h3,
+  .confirm-modal h3 {
+    font-size: var(--font-size-base);
+  }
+  
+  .notification-buttons {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .notification-buttons button {
+    width: 100%;
+    padding: 0.6rem;
   }
 }
 
