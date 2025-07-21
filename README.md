@@ -1,3 +1,39 @@
+```
+backend/
+├── index.js                  ← servidor principal (carga rutas y config)
+├── .env
+├── sql/
+│   └── database.sql
+├── db/
+│   └── pool.js               ← conexión a MySQL con pool
+├── routes/
+│   ├── usuarios.js           ← rutas relacionadas a usuarios
+│   ├── heroes.js             ← rutas relacionadas a héroes
+│   └── tareas.js             ← rutas relacionadas a tareas
+├── controllers/
+│   ├── usuarioController.js  ← lógica de negocio de usuarios
+│   └── ...
+└── package.json
+```
+
+Ejecutar con node index.js
+Script para ejecutar base de datos MySQL
+mysql -u root -p < sql/database.sql
+
+## Versiones del Proyecto
+### Backend (Node.js + Express)
+- Node.js: `v22.17.1`
+- express: `4.18.2`
+- mysql2: `3.9.6`
+- dotenv: `16.3.1`
+- cors: `2.8.5`
+
+### 💻 Frontend (HTML + JS)
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+
+
 ## **Pasos para Ejecutar el Proyecto**
 
 Para poner en marcha la aplicación completa (frontend y backend), sigue estos pasos:
