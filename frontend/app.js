@@ -58,10 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 // ------------------------
 // PERSONALIZACIÓN DE TÍTULO
 // ------------------------
@@ -492,60 +488,6 @@ async function mostrarDetalleModal(idTarea) {
       if (e.target === modal) cerrarDetalleModal();
     };
 
-<<<<<<< HEAD
-   modal.innerHTML = `
-  <div class="task-detail-content" style="max-width: 500px; margin: auto; padding: 1.5rem; background: #fff; border-radius: 1rem; box-shadow: 0 0 20px rgba(0,0,0,0.2); font-family: 'Segoe UI', sans-serif;">
-    
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-      <h2 style="margin: 0; color: var(--color-primary); font-size: 1.5rem;">Detalles de la Tarea</h2>
-      <button onclick="cerrarDetalleModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
-    </div>
-
-    <input type="hidden" id="modal-id-tarea" value="${tarea.id_tarea}">
-
-    <div class="modal-form-group">
-      <label for="modal-titulo">Título:</label>
-      <input type="text" id="modal-titulo" value="${tarea.titulo}" ${tarea.estado !== 'Sin Asignar' ? 'disabled' : ''}>
-    </div>
-
-    <div class="modal-form-group">
-      <label for="modal-descripcion">Descripción:</label>
-      <textarea id="modal-descripcion" ${tarea.estado !== 'Sin Asignar' ? 'disabled' : ''}>${tarea.descripcion}</textarea>
-    </div>
-
-    <div class="modal-form-group">
-      <label for="modal-tema">Tema:</label>
-      <select id="modal-tema" ${tarea.estado !== 'Sin Asignar' ? 'disabled' : ''}>
-        <option value="Literatura" ${tarea.tema === 'Literatura' ? 'selected' : ''}>Literatura</option>
-        <option value="Ortografía" ${tarea.tema === 'Ortografía' ? 'selected' : ''}>Ortografía</option>
-        <option value="Psicología" ${tarea.tema === 'Psicología' ? 'selected' : ''}>Psicología</option>
-        <option value="Tecnología" ${tarea.tema === 'Tecnología' ? 'selected' : ''}>Tecnología</option>
-        <option value="Otros" ${tarea.tema === 'Otros' ? 'selected' : ''}>Otros</option>
-      </select>
-    </div>
-
-    <div class="modal-form-group">
-      <label for="modal-fecha">Fecha deseada:</label>
-      <input type="date" id="modal-fecha" value="${formatearFecha(tarea.fecha_deseada)}" ${tarea.estado !== 'Sin Asignar' ? 'disabled' : ''}>
-    </div>
-
-    ${tarea.estado !== 'Sin Asignar' && tarea.comentario_heroe ? `
-      <div class="modal-form-group">
-        <label>Comentario del Héroe:</label>
-        <div class="task-comment-text" style="background: #f1f1f1; padding: 0.5rem 1rem; border-radius: 0.5rem;">${tarea.comentario_heroe}</div>
-      </div>` : ''
-    }
-
-    <div style="text-align: right; margin-top: 1.5rem;">
-      ${tarea.estado === 'Sin Asignar' ? `<button onclick="guardarCambiosDesdeModal()" class="btn-primary" style="margin-right: 0.5rem;">Guardar Cambios</button>` : ''}
-      <button onclick="cerrarDetalleModal()" class="btn-secondary">Cerrar</button>
-    </div>
-  </div>
-`;
-
-
-    
-=======
     modal.innerHTML = `
       <div class="task-detail-content">
         <div class="task-detail-header">
@@ -589,7 +531,6 @@ async function mostrarDetalleModal(idTarea) {
         </div>
       </div>
     `;
->>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 
     document.body.appendChild(modal);
     
@@ -761,11 +702,6 @@ async function mostrarAsignadas() {
   }
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 // -------------------------------
 // FINALIZAR TAREA (HÉROE)
 // -------------------------------
@@ -1063,41 +999,3 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-<<<<<<< HEAD
-async function guardarCambiosDesdeModal() {
-  const id = document.getElementById('modal-id-tarea').value;
-  const titulo = document.getElementById('modal-titulo').value.trim();
-  const descripcion = document.getElementById('modal-descripcion').value.trim();
-  const tema = document.getElementById('modal-tema').value;
-  const fecha = document.getElementById('modal-fecha').value;
-
-  if (!titulo || !descripcion || !tema || !fecha) {
-    mostrarError('Todos los campos son obligatorios.');
-    return;
-  }
-
-  try {
-    const res = await fetch(`${API_BASE}/tareas/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ titulo, descripcion, tema, fecha_deseada: fecha })
-    });
-
-    const data = await res.json();
-    if (res.ok) {
-      mostrarExito('Tarea actualizada correctamente.');
-      cerrarDetalleModal();
-      mostrarTareasPublicadas();
-    } else {
-      mostrarError(data.error || 'No se pudo actualizar la tarea.');
-    }
-  } catch (err) {
-    console.error(err);
-    mostrarError('Error de conexión con el servidor.');
-  }
-  
-}
-
-
-=======
->>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
