@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publicar Tarea | Avengers Colombia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <div class="header-with-logout">
+      <h1>Publicar Tarea</h1>
+      <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+    <nav class="nav-centered">
+      <a href="mis-tareas.html">Mis Tareas</a>
+      <a href="publicar-tarea.html">Publicar Tarea</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="form-container">
+      <h2>Describe tu tarea</h2>
+      <form id="tareaForm">
+        <label for="titulo">Título de la tarea:</label>
+        <input type="text" id="titulo" maxlength="100" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" maxlength="500" required></textarea>
+
+        <label for="tema">Tema relacionado:</label>
+        <select id="tema" required>
+          <option value="">Elegir...</option>
+          <option value="Literatura">Literatura</option>
+          <option value="Tecnología">Tecnología</option>
+          <option value="Psicología">Psicología</option>
+          <option value="Ortografía">Ortografía</option>
+          <option value="Cultura ciudadana">Cultura ciudadana</option>
+          <option value="Historia">Historia</option>
+          <option value="Geografía">Geografía</option>
+          <option value="Educación">Educación</option>
+          <option value="Humor educativo">Humor educativo</option>
+          <option value="Otros">Otros</option>
+        </select>
+
+        <label for="fecha">Fecha deseada:</label>
+        <input type="date" id="fecha" required>
+
+        <button type="submit">Publicar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Avengers Colombia - Conectando héroes con ciudadanos</p>
+  </footer>
+
+  <script src="app.js"></script>
+
+</body>

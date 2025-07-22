@@ -1,0 +1,1825 @@
+/* ===================================================
+   VARIABLES CSS - SISTEMA DE DISEÑO
+   =================================================== */
+:root {
+  /* Colores principales */
+  --color-primary: #003049;
+  --color-primary-dark: #001d33;
+  --color-secondary: #f77f00;
+  --color-secondary-dark: #d95d00;
+  --color-danger: #d62828;
+  --color-danger-dark: #a61010;
+  --color-success: #28a745;
+  --color-success-dark: #218838;
+  
+  /* Colores modo héroe */
+  --color-hero-bg: #fff3b0;
+  --color-hero-accent: #fcbf49;
+  --color-hero-text: #003049;
+  --color-hero-danger: #8b1538;
+  --color-hero-danger-dark: #6b1028;
+  --color-hero-success: #1e7e34;
+  --color-hero-success-dark: #155724;
+  
+  /* Colores neutros */
+  --color-white: #ffffff;
+  --color-gray-light: #f4f4f4;
+  --color-gray: #6c757d;
+  --color-gray-dark: #495057;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-text-muted: #888888;
+  
+  /* Espaciado */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  
+  /* Tipografía */
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-sm: 0.9rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.1rem;
+  --font-size-xl: 1.3rem;
+  --font-size-xxl: 1.8rem;
+  
+  /* Bordes y sombras */
+  --border-radius: 6px;
+  --border-radius-lg: 10px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --box-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --box-shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.3);
+  
+  /* Transiciones */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ===================================================
+   RESET Y BASE - Más general
+   =================================================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--color-gray-light);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===================================================
+   TIPOGRAFÍA GENERAL
+   =================================================== */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  color: var(--color-primary);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===================================================
+   LAYOUT GENERAL - Estructura base
+   =================================================== */
+main {
+  flex: 1;
+}
+
+/* Headers - Base común */
+header {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  color: var(--color-white);
+  font-size: var(--font-size-xxl);
+  font-weight: 600;
+}
+
+/* Sistema de navegación con header y logout separados */
+.header-with-logout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.header-with-logout h1 {
+  text-align: left;
+  margin: 0;
+  flex: 1;
+}
+
+.header-with-logout .logout {
+  font-size: var(--font-size-sm);
+  padding: 0.5rem 1rem;
+  margin: 0;
+}
+
+/* Navegación centrada */
+.nav-centered {
+  text-align: center;
+  margin-top: var(--spacing-sm);
+}
+
+/* Footers - Base común */
+footer {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+  padding: var(--spacing-md);
+  margin-top: auto;
+}
+
+footer p {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+}
+
+/* Navegación - Base común */
+nav a {
+  color: var(--color-hero-accent);
+  margin: 0 var(--spacing-sm);
+  font-weight: bold;
+}
+
+/* ===================================================
+   SISTEMA DE BOTONES UNIFICADO - Base común
+   =================================================== */
+button,
+.btn,
+.landing-buttons a,
+.kanban-header .logout,
+.header-with-logout .logout,
+.btn-finalizar {
+  margin-top: var(--spacing-sm);
+  margin-right: var(--spacing-sm);
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+}
+
+button:hover,
+.btn:hover,
+.landing-buttons a:hover,
+.kanban-header .logout:hover,
+.header-with-logout .logout:hover,
+.btn-finalizar:hover {
+  background-color: var(--color-secondary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow-hover);
+  text-decoration: none;
+}
+
+button:active,
+.btn:active,
+.landing-buttons a:active,
+.kanban-header .logout:active,
+.header-with-logout .logout:active,
+.btn-finalizar:active {
+  transform: translateY(0);
+  box-shadow: var(--box-shadow);
+}
+
+/* Variantes de botones - solo colores */
+.btn-danger,
+.kanban-header .logout,
+.header-with-logout .logout {
+  background-color: var(--color-danger);
+}
+
+.btn-danger:hover,
+.kanban-header .logout:hover,
+.header-with-logout .logout:hover {
+  background-color: var(--color-danger-dark);
+}
+
+.btn-success,
+.btn-finalizar {
+  background-color: var(--color-success);
+}
+
+.btn-success:hover,
+.btn-finalizar:hover {
+  background-color: var(--color-success-dark);
+}
+
+.btn-secondary {
+  background-color: var(--color-gray);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-gray-dark);
+}
+
+.btn-primary {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+/* Botones de landing específicos - solo colores */
+.landing-buttons .btn-login {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.landing-buttons .btn-login:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.landing-buttons .btn-register {
+  background-color: #fdc181;
+  color: var(--color-primary);
+}
+
+.landing-buttons .btn-register:hover {
+  background-color: var(--color-secondary-dark);
+  color: var(--color-white);
+}
+
+/* Botones específicos - ajustes de tamaño */
+.kanban-header .logout {
+  margin: 0;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.btn-finalizar {
+  width: 100%;
+  margin-top: var(--spacing-xs);
+  margin-right: 0;
+}
+
+/* ===================================================
+   SISTEMA DE FORMULARIOS - Base común
+   =================================================== */
+.form-container {
+  max-width: 600px;
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-lg);
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+}
+
+.form-container label {
+  display: block;
+  margin: var(--spacing-sm) 0 0.3rem;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.form-container input,
+.form-container textarea,
+.form-container select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 2px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  transition: border-color var(--transition-base);
+}
+
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px rgba(247, 127, 0, 0.2);
+}
+
+.form-container textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Botones de formulario heredan del sistema base */
+.form-container button {
+  width: 100%;
+  margin-top: var(--spacing-md);
+  margin-right: 0;
+}
+
+.form-container p {
+  text-align: center;
+  margin-top: var(--spacing-sm);
+}
+
+.form-container a {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+/* ===================================================
+   SISTEMA DE TABLAS - Base común
+   =================================================== */
+table {
+  width: 90%;
+  margin: var(--spacing-lg) auto;
+  border-collapse: collapse;
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: var(--spacing-sm);
+  text-align: left;
+}
+
+th {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* ===================================================
+   DISEÑO DE TARJETAS PARA MIS TAREAS (RESPONSIVO)
+   =================================================== */
+
+.tasks-container {
+  display: none; /* Oculto por defecto, se muestra en responsive */
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) auto;
+  max-width: 1200px;
+  padding: 0 var(--spacing-sm);
+}
+
+.task-card {
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+  padding: var(--spacing-md);
+  border-left: 4px solid var(--color-primary);
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.task-card:hover {
+  box-shadow: var(--box-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+}
+
+.task-card h3 {
+  color: var(--color-primary);
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  line-height: 1.3;
+  flex: 1;
+  margin-right: var(--spacing-sm);
+}
+
+.task-status {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  text-align: center;
+  min-width: 100px;
+  white-space: nowrap;
+}
+
+.task-status.sin-asignar {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.task-status.asignada {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+.task-status.finalizada {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.task-card-body {
+  margin-bottom: var(--spacing-md);
+}
+
+.task-detail {
+  margin-bottom: var(--spacing-xs);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.task-detail-label {
+  font-weight: bold;
+  color: var(--color-text);
+  margin-right: var(--spacing-xs);
+  min-width: 80px;
+}
+
+.task-detail-value {
+  color: var(--color-text-light);
+  flex: 1;
+  line-height: 1.4;
+}
+
+.task-card-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  justify-content: flex-end;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid #e9ecef;
+}
+
+.task-card-actions button {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+}
+
+.task-card-actions .btn-danger {
+  background-color: var(--color-danger);
+  color: white;
+}
+
+.task-card-actions .btn-danger:hover {
+  background-color: var(--color-danger-dark);
+}
+
+.task-card-actions .btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.task-card-actions .btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Elementos editables */
+td[contenteditable="true"],
+.task-item span[contenteditable="true"],
+.task-item h3[contenteditable="true"] {
+  background: #fef3c7;
+  border-radius: var(--border-radius);
+  padding: 0.2rem 0.4rem;
+  border: 1px dashed var(--color-secondary);
+}
+
+/* ===================================================
+   SISTEMA DE NOTIFICACIONES Y MODALES - Base común
+   =================================================== */
+.notification-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.notification-modal,
+.confirm-modal {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  max-width: 400px;
+  width: 90%;
+  box-shadow: var(--box-shadow-modal);
+  text-align: center;
+  animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.notification-modal h3,
+.confirm-modal h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.2rem;
+}
+
+.notification-modal p,
+.confirm-modal p {
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.5;
+}
+
+.notification-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+}
+
+/* Botones de modales heredan del sistema base */
+.notification-modal button,
+.confirm-modal button {
+  padding: 0.7rem 1.5rem;
+}
+
+/* ===================================================
+   MODAL DE DETALLES DE TAREA
+   =================================================== */
+
+.task-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--spacing-sm);
+}
+
+.task-detail-content {
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-modal);
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modalSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+}
+
+.task-detail-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+  position: relative;
+}
+
+.task-detail-header h2 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  line-height: 1.3;
+  padding-right: var(--spacing-xl);
+}
+
+.task-detail-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: var(--color-white);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.task-detail-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.task-detail-body {
+  padding: var(--spacing-lg);
+}
+
+.task-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+.task-info-item {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: var(--spacing-sm);
+}
+
+.task-info-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.task-info-label {
+  font-weight: bold;
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-xs);
+  display: block;
+}
+
+.task-info-value {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  display: block;
+}
+
+.task-info-value.description {
+  background: #f8f9fa;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--color-secondary);
+}
+
+.task-status-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.task-status-badge.sin-asignar {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.task-status-badge.asignada {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+.task-status-badge.finalizada {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.task-comment-section {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: var(--border-radius);
+  border: 1px solid #dee2e6;
+}
+
+.task-comment-title {
+  color: var(--color-primary);
+  font-weight: bold;
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.task-comment-title::before {
+  content: "💬";
+  font-size: var(--font-size-lg);
+}
+
+.task-comment-text {
+  background: var(--color-white);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--color-success);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.task-detail-footer {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: 1px solid #e9ecef;
+  text-align: right;
+}
+
+.task-detail-footer button {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.task-detail-footer button:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+/* ===================================================
+   COMPONENTES ESPECÍFICOS - Orden de especificidad
+   =================================================== */
+
+/* Landing Page */
+.landing {
+  max-width: 600px;
+  background: var(--color-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  margin: var(--spacing-lg) auto;
+}
+
+.landing h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.landing p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Contenedor específico para botones de landing */
+.landing-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* Sistema de Tareas */
+.task-list {
+  max-width: 900px;
+  margin: var(--spacing-lg) auto;
+  padding: 0 var(--spacing-sm);
+}
+
+.task-item {
+  background-color: var(--color-white);
+  border-left: 6px solid var(--color-danger);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: all var(--transition-base);
+}
+
+.task-item:hover {
+  box-shadow: var(--box-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.task-item h3 {
+  margin-top: 0;
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+}
+
+.task-item p {
+  margin: 0.5rem 0;
+  color: var(--color-text-light);
+}
+
+.task-item button {
+  width: 100%;
+  margin-top: var(--spacing-sm);
+  margin-right: 0;
+}
+
+.hero-comment-box {
+  background-color: #fdf1d6;
+  border-left: 4px solid var(--color-secondary);
+  padding: var(--spacing-sm);
+  margin: var(--spacing-sm) 0;
+  border-radius: var(--border-radius);
+  font-style: italic;
+  white-space: pre-wrap;
+  user-select: text;
+}
+
+/* Sistema Kanban */
+.kanban-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  background-color: transparent;
+  color: inherit;
+}
+
+.kanban-header h1 {
+  margin: 0;
+  font-size: var(--font-size-xxl);
+  color: inherit;
+  font-weight: 600;
+}
+
+/* Estilos para el nombre personalizado del héroe */
+.kanban-header h1 span {
+  display: inline;
+  transition: var(--transition-base);
+}
+
+body.modo-heroe .kanban-header h1 span {
+  color: var(--color-primary) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.kanban-main {
+  max-width: 1200px;
+  margin: var(--spacing-sm) auto;
+  padding: 0 var(--spacing-sm);
+}
+
+.kanban-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-sm);
+}
+
+.kanban-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-column h4 {
+  color: var(--color-primary);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-xs);
+  background-color: rgba(252, 191, 73, 0.3);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-lg);
+}
+
+.kanban-col {
+  min-height: 400px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--color-hero-accent);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.kanban-task {
+  background-color: var(--color-white);
+  border: 1px solid #e9ecef;
+  border-left: 4px solid var(--color-secondary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: default;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.kanban-task::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.kanban-task:hover::before {
+  left: 100%;
+}
+
+.kanban-task:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  border-left-color: var(--color-secondary-dark);
+}
+
+.kanban-task h4,
+.kanban-task h5 {
+  color: var(--color-primary);
+  margin: 0 0 var(--spacing-xs) 0;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  cursor: text;
+  user-select: text;
+}
+
+.kanban-task p {
+  color: var(--color-text-light);
+  margin: var(--spacing-xs) 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  cursor: text;
+  user-select: text;
+}
+
+.kanban-task strong {
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: text;
+  user-select: text;
+}
+
+.kanban-task .task-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-xs);
+  border-top: 1px solid #f1f3f4;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.kanban-task button {
+  margin-top: var(--spacing-sm);
+  width: 100%;
+  transition: all var(--transition-fast);
+}
+
+.kanban-task button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.kanban-empty {
+  background-color: rgba(248, 249, 250, 0.8);
+  border: 2px dashed #dee2e6;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: var(--spacing-sm) 0;
+}
+
+/* Estados específicos de las tarjetas Kanban */
+.kanban-task.sin-asignar {
+  border-left-color: #ffc107;
+  background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+}
+
+.kanban-task.sin-asignar:hover {
+  border-left-color: #e0a800;
+  box-shadow: 0 12px 24px rgba(255, 193, 7, 0.3);
+}
+
+.kanban-task.asignada {
+  border-left-color: #0d6efd;
+  background: linear-gradient(135deg, #e6f2ff 0%, #ffffff 100%);
+}
+
+.kanban-task.asignada:hover {
+  border-left-color: #0b5ed7;
+  box-shadow: 0 12px 24px rgba(13, 110, 253, 0.3);
+}
+
+.kanban-task.finalizada {
+  border-left-color: #198754;
+  background: linear-gradient(135deg, #e6f7ed 0%, #ffffff 100%);
+}
+
+.kanban-task.finalizada:hover {
+  border-left-color: #146c43;
+  box-shadow: 0 12px 24px rgba(25, 135, 84, 0.3);
+}
+
+/* Animación especial para tarjetas que se están moviendo */
+.kanban-task.moving {
+  animation: taskMove 0.5s ease-in-out;
+  z-index: 10;
+}
+
+@keyframes taskMove {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.kanban-textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: var(--spacing-xs);
+  border: 2px solid #e9ecef;
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  margin: var(--spacing-sm) 0;
+  resize: vertical;
+  background-color: #f8f9fa;
+  transition: all var(--transition-base);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.kanban-textarea:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  background-color: var(--color-white);
+  box-shadow: 0 0 0 3px rgba(247, 127, 0, 0.1), inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+
+
+/* ===================================================
+   MODO HÉROE - Sobrescribir colores manteniendo estructura
+   =================================================== */
+body.modo-heroe {
+  background-color: var(--color-hero-bg);
+  color: var(--color-hero-text);
+}
+
+/* Headers y footers en modo héroe - solo colores */
+body.modo-heroe header,
+body.modo-heroe footer {
+  background-color: var(--color-hero-accent);
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe header h1,
+body.modo-heroe footer p {
+  color: var(--color-hero-text);
+}
+
+/* Kanban en modo héroe - solo colores */
+body.modo-heroe .kanban-header {
+  background-color: var(--color-hero-accent);
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe .kanban-header h1 {
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe .kanban-column h4 {
+  background-color: rgba(0, 48, 73, 0.1);
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe .kanban-col {
+  background-color: rgba(255, 243, 176, 0.8);
+  border: 2px solid var(--color-primary);
+}
+
+body.modo-heroe .kanban-task {
+  background-color: var(--color-white);
+  border-left: 4px solid var(--color-primary);
+}
+
+/* Estados específicos en modo héroe */
+body.modo-heroe .kanban-task.sin-asignar {
+  border-left-color: var(--color-hero-accent);
+  background: linear-gradient(135deg, var(--color-hero-bg) 0%, #ffffff 100%);
+}
+
+body.modo-heroe .kanban-task.sin-asignar:hover {
+  border-left-color: var(--color-secondary-dark);
+  box-shadow: 0 12px 24px rgba(252, 191, 73, 0.4);
+}
+
+body.modo-heroe .kanban-task.asignada {
+  border-left-color: var(--color-primary);
+  background: linear-gradient(135deg, #e6f2ff 0%, #ffffff 100%);
+}
+
+body.modo-heroe .kanban-task.asignada:hover {
+  border-left-color: var(--color-primary-dark);
+  box-shadow: 0 12px 24px rgba(0, 48, 73, 0.4);
+}
+
+body.modo-heroe .kanban-task.finalizada {
+  border-left-color: var(--color-hero-success);
+  background: linear-gradient(135deg, #e6f7ed 0%, #ffffff 100%);
+}
+
+body.modo-heroe .kanban-task.finalizada:hover {
+  border-left-color: var(--color-hero-success-dark);
+  box-shadow: 0 12px 24px rgba(30, 126, 52, 0.4);
+}
+
+body.modo-heroe .kanban-empty {
+  background-color: rgba(255, 243, 176, 0.5);
+  border-color: var(--color-hero-accent);
+  color: var(--color-hero-text);
+}
+
+body.modo-heroe .kanban-textarea {
+  border-color: var(--color-hero-accent);
+  background-color: rgba(255, 243, 176, 0.3);
+}
+
+body.modo-heroe .kanban-textarea:focus {
+  border-color: var(--color-primary);
+  background-color: var(--color-white);
+  box-shadow: 0 0 0 3px rgba(0, 48, 73, 0.1), inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Botones en modo héroe - solo colores */
+body.modo-heroe button,
+body.modo-heroe .btn,
+body.modo-heroe .landing-buttons a {
+  background-color: var(--color-primary);
+  color: var(--color-hero-bg);
+}
+
+body.modo-heroe button:hover,
+body.modo-heroe .btn:hover,
+body.modo-heroe .landing-buttons a:hover {
+  background-color: var(--color-primary-dark);
+}
+
+body.modo-heroe .btn-danger,
+body.modo-heroe .kanban-header .logout,
+body.modo-heroe .header-with-logout .logout {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+
+body.modo-heroe .btn-danger:hover,
+body.modo-heroe .kanban-header .logout:hover,
+body.modo-heroe .header-with-logout .logout:hover {
+  background-color: var(--color-danger-dark);
+}
+
+body.modo-heroe .btn-success,
+body.modo-heroe .btn-finalizar {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+body.modo-heroe .btn-success:hover,
+body.modo-heroe .btn-finalizar:hover {
+  background-color: var(--color-success-dark);
+}
+
+body.modo-heroe .btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-hero-bg);
+}
+
+body.modo-heroe .btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Modales en modo héroe - solo colores */
+body.modo-heroe .notification-modal,
+body.modo-heroe .confirm-modal {
+  background-color: var(--color-hero-bg);
+  border: 2px solid var(--color-hero-accent);
+}
+
+body.modo-heroe .notification-modal p,
+body.modo-heroe .confirm-modal p {
+  color: var(--color-hero-text);
+}
+
+/* ===================================================
+   RESPONSIVE DESIGN - De general a específico
+   =================================================== */
+
+/* Tablets - diseño de 2 columnas */
+@media (max-width: 1024px) and (min-width: 769px) {
+  /* ===================================================
+     TARJETAS EN TABLETS - 2 COLUMNAS
+     =================================================== */
+  
+  /* Ocultar tabla y mostrar tarjetas en tablets también */
+  table {
+    display: none !important;
+  }
+  
+  .tasks-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    max-width: 1000px;
+  }
+  
+  .task-card {
+    padding: var(--spacing-md);
+  }
+  
+  .task-card h3 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .task-card-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  
+  /* Kanban para tablets */
+  .kanban-container {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  /* Reorganizar columnas para tablets */
+  .kanban-column:has(#columna-sin-asignar) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .kanban-column:has(#columna-asignadas) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  .kanban-column:has(#columna-finalizadas) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  
+  .kanban-col {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Layout general responsive */
+  header {
+    padding: var(--spacing-sm);
+  }
+  
+  header h1,
+  .kanban-header h1 {
+    font-size: var(--font-size-xl);
+  }
+  
+  /* ===================================================
+     CAMBIO A DISEÑO DE TARJETAS PARA TAREAS
+     =================================================== */
+  
+  /* Ocultar tabla original en dispositivos móviles */
+  table {
+    display: none !important;
+  }
+  
+  /* Mostrar contenedor de tarjetas */
+  .tasks-container {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin: var(--spacing-md) auto;
+    padding: 0 var(--spacing-sm);
+  }
+  
+  /* Kanban responsive - cambio a columna única */
+  .kanban-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    text-align: center;
+    padding: var(--spacing-sm);
+  }
+  
+  .kanban-main {
+    padding: 0 var(--spacing-xs);
+  }
+  
+  .kanban-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+  }
+  
+  .kanban-column {
+    order: 1;
+  }
+  
+  /* Reordenar columnas para mejor flujo móvil */
+  .kanban-column:has(#columna-sin-asignar) {
+    order: 1;
+  }
+  
+  .kanban-column:has(#columna-asignadas) {
+    order: 2;
+  }
+  
+  .kanban-column:has(#columna-finalizadas) {
+    order: 3;
+  }
+  
+  .kanban-col {
+    min-height: 200px;
+    padding: var(--spacing-sm);
+  }
+  
+  .kanban-column h4 {
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  /* Tarjetas más compactas en móvil */
+  .kanban-task {
+    padding: var(--spacing-sm);
+  }
+  
+  .kanban-task h4 {
+    font-size: var(--font-size-base);
+  }
+  
+  .kanban-task p {
+    font-size: 0.85rem;
+    margin: 0.3rem 0;
+  }
+  
+  /* Formularios responsive */
+  .form-container,
+  .landing {
+    margin: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+  
+  /* Navegación responsive */
+  nav a {
+    display: block;
+    margin: var(--spacing-xs) 0;
+  }
+  
+  /* Botones responsive */
+  .landing-buttons {
+    gap: var(--spacing-xs);
+  }
+
+  .landing-buttons a {
+    padding: 0.7rem;
+    font-size: var(--font-size-sm);
+  }
+
+  /* ===================================================
+     MEJORAS PARA TARJETAS EN MOBILE
+     =================================================== */
+  
+  .task-card {
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+  
+  .task-card h3 {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .task-card-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-xs);
+  }
+  
+  .task-status {
+    align-self: flex-start;
+    min-width: auto;
+  }
+  
+  .task-detail {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .task-detail-label {
+    min-width: auto;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .task-card-actions {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .task-card-actions button {
+    width: 100%;
+    padding: var(--spacing-sm);
+  }
+  
+  /* ===================================================
+     MODAL RESPONSIVO EN DISPOSITIVOS MÓVILES
+     =================================================== */
+  
+  .task-detail-content {
+    margin: var(--spacing-xs);
+    max-height: 90vh;
+    max-width: none;
+    width: calc(100vw - 2rem);
+  }
+  
+  .task-detail-header {
+    padding: var(--spacing-md);
+  }
+  
+  .task-detail-header h2 {
+    font-size: var(--font-size-lg);
+    padding-right: var(--spacing-lg);
+  }
+  
+  .task-detail-body {
+    padding: var(--spacing-md);
+  }
+  
+  .task-info-item {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .task-info-label {
+    font-size: var(--font-size-xs);
+  }
+  
+  .task-info-value {
+    font-size: var(--font-size-sm);
+  }
+  
+  .task-comment-section {
+    padding: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+  }
+  
+  .task-detail-footer {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .task-detail-footer button {
+    width: 100%;
+    padding: var(--spacing-md);
+  }
+}@media (max-width: 480px) {
+  /* Móviles pequeños - diseño muy optimizado */
+  header h1,
+  .kanban-header h1 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .kanban-main {
+    padding: 0 var(--spacing-xs);
+    margin: var(--spacing-xs) auto;
+  }
+  
+  .kanban-container {
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xs);
+  }
+  
+  .kanban-header {
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .kanban-header .logout {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .kanban-column h4 {
+    font-size: var(--font-size-base);
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .kanban-col {
+    min-height: 150px;
+    padding: var(--spacing-xs);
+  }
+  
+  /* Tarjetas ultra-compactas */
+  .kanban-task {
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .kanban-task h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .kanban-task p {
+    font-size: 0.8rem;
+    margin: 0.2rem 0;
+    line-height: 1.3;
+  }
+  
+  .kanban-task button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    margin-top: var(--spacing-xs);
+  }
+  
+  .kanban-textarea {
+    min-height: 40px;
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+  
+  /* Formularios más compactos */
+  .form-container,
+  .landing {
+    padding: var(--spacing-sm);
+    margin: var(--spacing-xs);
+  }
+  
+  .form-container h2 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .form-container input,
+  .form-container textarea,
+  .form-container select {
+    padding: 0.5rem;
+    font-size: var(--font-size-sm);
+  }
+  
+  /* Tablas más simples en móvil muy pequeño */
+  table {
+    font-size: 0.8rem;
+  }
+  
+  td {
+    padding: 0.3rem 0 0.3rem 35%;
+  }
+  
+  td:before {
+    width: 30%;
+    font-size: 0.75rem;
+  }
+  
+  /* Tareas responsive */
+  .task-list {
+    padding: 0 var(--spacing-xs);
+  }
+  
+  .task-item {
+    padding: var(--spacing-sm);
+  }
+  
+  .task-item h3 {
+    font-size: var(--font-size-lg);
+  }
+  
+  /* Modales responsive */
+  .notification-modal,
+  .confirm-modal {
+    margin: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    max-width: 95%;
+  }
+  
+  .notification-modal h3,
+  .confirm-modal h3 {
+    font-size: var(--font-size-base);
+  }
+  
+  .notification-buttons {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .notification-buttons button {
+    width: 100%;
+    padding: 0.6rem;
+  }
+}
+
+/* ===================================================
+   UTILIDADES - Lo más específico
+   =================================================== */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+
+.w-100 { width: 100%; }
+
+.d-flex { display: flex; }
+.justify-center { justify-content: center; }
+.align-center { align-items: center; }
+.gap-1 { gap: var(--spacing-xs); }
+.gap-2 { gap: var(--spacing-sm); }
+.gap-3 { gap: var(--spacing-md); }
+
+.modal-form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-form-group label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.modal-form-group input,
+.modal-form-group textarea,
+.modal-form-group select {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark, #004080);
+}
+
+.btn-secondary:hover {
+  background-color: #ccc;
+}
+
+/* === Inputs bonitos para el modal de edición === */
+.modal-form-group input,
+.modal-form-group textarea,
+.modal-form-group select {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.6rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.modal-form-group input:focus,
+.modal-form-group textarea:focus,
+.modal-form-group select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 100, 180, 0.2);
+  background-color: #fff;
+}
+
+.modal-form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-form-group input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.6rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  color: #333;
+}
+
+.modal-form-group input[type="date"]:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 100, 180, 0.2);
+  background-color: #fff;
+}
+
+
+/* ===================================================
+   FIN DEL ARCHIVO CSS OPTIMIZADO
+   =================================================== */

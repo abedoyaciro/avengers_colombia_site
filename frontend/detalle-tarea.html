@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle de Tarea | Avengers Colombia</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero-comment-box {
+      background-color: #fef3c7;
+      border-left: 4px solid #f77f00;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-with-logout">
+      <h1>Detalle de Tarea</h1>
+      <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+    <nav class="nav-centered">
+      <a href="mis-tareas.html">Volver</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="detalleTarea" class="form-container">
+      <!-- Contenido dinámico -->
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const id = sessionStorage.getItem('detalle_id');
+      if (!id) {
+        document.getElementById('detalleTarea').innerHTML = '<p>Error: ID de tarea no encontrado.</p>';
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:3000/api/tareas/${id}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          document.getElementById('detalleTarea').innerHTML = `<p>Error al obtener la tarea.</p>`;
+          return;
+        }
+
+        document.getElementById('detalleTarea').innerHTML = `
+          <h2>${data.titulo}</h2>
+          <p><strong>Descripción:</strong> ${data.descripcion}</p>
+          <p><strong>Tema:</strong> ${data.tema}</p>
+          <p><strong>Fecha deseada:</strong> ${data.fecha_deseada}</p>
+          ${data.comentario_heroe ? `<div class="hero-comment-box">${data.comentario_heroe}</div>` : ''}
+        `;
+
+      } catch (err) {
+        document.getElementById('detalleTarea').innerHTML = '<p>Error al conectar con el servidor.</p>';
+      }
+    });
+  </script>
+</body>
+
+<footer>
+  <p>&copy; 2025 Avengers Colombia - Conectando héroes con ciudadanos</p>
+</footer>
+
+</html>
