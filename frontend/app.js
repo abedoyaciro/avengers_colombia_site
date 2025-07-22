@@ -402,11 +402,10 @@ function generarTablaTareas(tareas) {
         <td>${formatearFechaEspanol(tarea.fecha_deseada)}</td>
         <td>${tarea.estado}</td>
         <td>
+          <button onclick="mostrarDetalleModal(${tarea.id_tarea})">Ver Detalles</button>
           ${tarea.estado === 'Sin Asignar' 
-            ? `<button onclick="eliminarTareaBackend(${tarea.id_tarea})">Eliminar</button>`
-            : tarea.estado === 'Finalizada'
-              ? `<button onclick="verDetalle(${tarea.id_tarea})">Ver Detalles</button>`
-              : ''}
+            ? `<button onclick="eliminarTareaBackend(${tarea.id_tarea})" style="margin-left: 8px; background-color: var(--color-danger);">Eliminar</button>`
+            : ''}
         </td>
       </tr>`;
   });
@@ -426,11 +425,10 @@ function generarTarjetasTareas(tareas) {
     const estadoClase = tarea.estado.toLowerCase().replace(' ', '-');
     const estadoTexto = tarea.estado;
     
-    let acciones = '';
+    let acciones = `<button class="btn-primary" onclick="mostrarDetalleModal(${tarea.id_tarea})">Ver Detalles</button>`;
+    
     if (tarea.estado === 'Sin Asignar') {
-      acciones = `<button class="btn-danger" onclick="eliminarTareaBackend(${tarea.id_tarea})">Eliminar</button>`;
-    } else if (tarea.estado === 'Finalizada') {
-      acciones = `<button class="btn-primary" onclick="verDetalle(${tarea.id_tarea})">Ver Detalles</button>`;
+      acciones += ` <button class="btn-danger" onclick="eliminarTareaBackend(${tarea.id_tarea})">Eliminar</button>`;
     }
     
     contenedorTarjetas += `
@@ -457,7 +455,7 @@ function generarTarjetasTareas(tareas) {
           </div>
         </div>
         
-        ${acciones ? `<div class="task-card-actions">${acciones}</div>` : ''}
+        <div class="task-card-actions">${acciones}</div>
       </div>`;
   });
   
@@ -465,9 +463,103 @@ function generarTarjetasTareas(tareas) {
   return contenedorTarjetas;
 }
 
+// -------------------------------
+// MODAL DE DETALLES DE TAREA
+// -------------------------------
+
+async function mostrarDetalleModal(idTarea) {
+  try {
+    const res = await fetch(`${API_BASE}/tareas/${idTarea}`);
+    const data = await res.json();
+
+    if (!res.ok) {
+      mostrarError(data.error || 'Error al obtener los detalles de la tarea.');
+      return;
+    }
+
+    const tarea = data;
+    const estadoClase = tarea.estado.toLowerCase().replace(' ', '-');
+    
+    // Crear y mostrar el modal
+    const modal = document.createElement('div');
+    modal.className = 'task-detail-modal';
+    modal.onclick = (e) => {
+      if (e.target === modal) cerrarDetalleModal();
+    };
+
+    modal.innerHTML = `
+      <div class="task-detail-content">
+        <div class="task-detail-header">
+          <h2>${tarea.titulo}</h2>
+          <button class="task-detail-close" onclick="cerrarDetalleModal()">×</button>
+        </div>
+        
+        <div class="task-detail-body">
+          <div class="task-info-grid">
+            <div class="task-info-item">
+              <span class="task-info-label">Descripción</span>
+              <span class="task-info-value description">${tarea.descripcion}</span>
+            </div>
+            
+            <div class="task-info-item">
+              <span class="task-info-label">Tema</span>
+              <span class="task-info-value">${tarea.tema}</span>
+            </div>
+            
+            <div class="task-info-item">
+              <span class="task-info-label">Fecha Deseada</span>
+              <span class="task-info-value">${formatearFechaEspanol(tarea.fecha_deseada)}</span>
+            </div>
+            
+            <div class="task-info-item">
+              <span class="task-info-label">Estado</span>
+              <span class="task-status-badge ${estadoClase}">${tarea.estado}</span>
+            </div>
+            
+            ${tarea.comentario_heroe ? `
+              <div class="task-comment-section">
+                <div class="task-comment-title">Comentario del Héroe</div>
+                <div class="task-comment-text">${tarea.comentario_heroe}</div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+        
+        <div class="task-detail-footer">
+          <button onclick="cerrarDetalleModal()">Cerrar</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    
+    // Agregar evento ESC para cerrar
+    document.addEventListener('keydown', function escHandler(e) {
+      if (e.key === 'Escape') {
+        cerrarDetalleModal();
+        document.removeEventListener('keydown', escHandler);
+      }
+    });
+
+  } catch (err) {
+    console.error(err);
+    mostrarError('No se pudo conectar con el servidor.');
+  }
+}
+
+function cerrarDetalleModal() {
+  const modal = document.querySelector('.task-detail-modal');
+  if (modal) {
+    modal.style.animation = 'modalSlideOut 0.2s ease';
+    setTimeout(() => {
+      modal.remove();
+    }, 200);
+  }
+}
+
+// Función legacy para compatibilidad (redirige al modal)
 function verDetalle(id) {
-  sessionStorage.setItem('detalle_id', id);
-  window.location.href = 'detalle-tarea.html';
+  mostrarDetalleModal(id);
 }
 
 
