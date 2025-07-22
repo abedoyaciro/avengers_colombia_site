@@ -239,11 +239,12 @@ if (registroForm) {
     const ubicacion = document.getElementById('ubicacion')?.value;
     const especializacion = document.getElementById('especializacion')?.value;
 
-    /*
-    if (!/^(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/.test(contrasenha)) {
-      mostrarError('La contraseña debe tener al menos 8 caracteres, un número y un símbolo especial.');
+
+    // Validación de contraseña segura
+    if (!/^(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/.test(contrasenha)) {
+      mostrarError('La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.');
       return;
-    } */
+    }
 
     try {
       let endpoint = '';
