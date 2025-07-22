@@ -87,7 +87,7 @@ class AvengersSetup:
                                     capture_output=True,
                                     text=True,
                                     timeout=5,
-                                    check=False,
+                                    check=True,
                                 )
                                 if result.returncode == 0:
                                     return full_path, result.stdout.strip()
