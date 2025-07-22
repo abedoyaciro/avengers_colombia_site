@@ -58,7 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 // ------------------------
 // PERSONALIZACIÓN DE TÍTULO
 // ------------------------
@@ -489,6 +492,7 @@ async function mostrarDetalleModal(idTarea) {
       if (e.target === modal) cerrarDetalleModal();
     };
 
+<<<<<<< HEAD
    modal.innerHTML = `
   <div class="task-detail-content" style="max-width: 500px; margin: auto; padding: 1.5rem; background: #fff; border-radius: 1rem; box-shadow: 0 0 20px rgba(0,0,0,0.2); font-family: 'Segoe UI', sans-serif;">
     
@@ -541,6 +545,51 @@ async function mostrarDetalleModal(idTarea) {
 
 
     
+=======
+    modal.innerHTML = `
+      <div class="task-detail-content">
+        <div class="task-detail-header">
+          <h2>${tarea.titulo}</h2>
+          <button class="task-detail-close" onclick="cerrarDetalleModal()">×</button>
+        </div>
+        
+        <div class="task-detail-body">
+          <div class="task-info-grid">
+            <div class="task-info-item">
+              <span class="task-info-label">Descripción</span>
+              <span class="task-info-value description">${tarea.descripcion}</span>
+            </div>
+            
+            <div class="task-info-item">
+              <span class="task-info-label">Tema</span>
+              <span class="task-info-value">${tarea.tema}</span>
+            </div>
+            
+            <div class="task-info-item">
+              <span class="task-info-label">Fecha Deseada</span>
+              <span class="task-info-value">${formatearFechaEspanol(tarea.fecha_deseada)}</span>
+            </div>
+            
+            <div class="task-info-item">
+              <span class="task-info-label">Estado</span>
+              <span class="task-status-badge ${estadoClase}">${tarea.estado}</span>
+            </div>
+            
+            ${tarea.comentario_heroe ? `
+              <div class="task-comment-section">
+                <div class="task-comment-title">Comentario del Héroe</div>
+                <div class="task-comment-text">${tarea.comentario_heroe}</div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+        
+        <div class="task-detail-footer">
+          <button onclick="cerrarDetalleModal()">Cerrar</button>
+        </div>
+      </div>
+    `;
+>>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 
     document.body.appendChild(modal);
     
@@ -712,8 +761,11 @@ async function mostrarAsignadas() {
   }
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 // -------------------------------
 // FINALIZAR TAREA (HÉROE)
 // -------------------------------
@@ -1011,6 +1063,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+<<<<<<< HEAD
 async function guardarCambiosDesdeModal() {
   const id = document.getElementById('modal-id-tarea').value;
   const titulo = document.getElementById('modal-titulo').value.trim();
@@ -1046,3 +1099,5 @@ async function guardarCambiosDesdeModal() {
 }
 
 
+=======
+>>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3

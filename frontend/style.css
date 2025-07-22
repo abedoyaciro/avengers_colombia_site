@@ -1723,6 +1723,7 @@ body.modo-heroe .confirm-modal p {
 .gap-2 { gap: var(--spacing-sm); }
 .gap-3 { gap: var(--spacing-md); }
 
+<<<<<<< HEAD
 .modal-form-group {
   margin-bottom: 1rem;
   display: flex;
@@ -1820,6 +1821,8 @@ body.modo-heroe .confirm-modal p {
 }
 
 
+=======
+>>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 /* ===================================================
    FIN DEL ARCHIVO CSS OPTIMIZADO
    =================================================== */

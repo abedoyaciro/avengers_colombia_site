@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 -- Crear base de datos con utf8mb4
 CREATE DATABASE IF NOT EXISTS avengers_colombia
   DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_general_ci;
 
+=======
+-- Crear base de datos (solo si no existe)
+CREATE DATABASE IF NOT EXISTS avengers_colombia;
+>>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 USE avengers_colombia;
 
 -- Tabla: usuarios
@@ -12,7 +17,11 @@ CREATE TABLE IF NOT EXISTS usuarios (
   correo VARCHAR(100) UNIQUE,
   contrasenha VARCHAR(100),
   ubicacion VARCHAR(100)
+<<<<<<< HEAD
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+=======
+);
+>>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 
 -- Tabla: heroes
 CREATE TABLE IF NOT EXISTS heroes (
@@ -21,7 +30,11 @@ CREATE TABLE IF NOT EXISTS heroes (
   correo VARCHAR(100) UNIQUE,
   contrasenha VARCHAR(100),
   especializacion VARCHAR(100)
+<<<<<<< HEAD
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+=======
+);
+>>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 
 -- Tabla: tareas
 CREATE TABLE IF NOT EXISTS tareas (
@@ -32,12 +45,22 @@ CREATE TABLE IF NOT EXISTS tareas (
   fecha_deseada DATE,
   estado ENUM('Sin Asignar', 'Asignada', 'Finalizada') DEFAULT 'Sin Asignar',
   comentario_heroe TEXT,
+<<<<<<< HEAD
   id_usuario INT,
   id_heroe INT,
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
   FOREIGN KEY (id_heroe) REFERENCES heroes(id_heroe) ON DELETE SET NULL
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
+=======
+
+  id_usuario INT,
+  id_heroe INT,
+
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+  FOREIGN KEY (id_heroe) REFERENCES heroes(id_heroe) ON DELETE SET NULL
+);
+>>>>>>> 31e519337cbd774649d2931c81a981ae7c636ea3
 
 -- insert usuarios
 INSERT IGNORE INTO usuarios (nombre, correo, contrasenha, ubicacion) VALUES
